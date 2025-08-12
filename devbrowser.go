@@ -29,19 +29,22 @@ type serverConfig interface {
 }
 
 type userInterface interface {
-	ReturnFocus()
+	ReturnFocus() error
 }
 
 /*
+devbrowser.New creates a new DevBrowser instance.
 
-type serverConfig interface {
-	GetServerPort() string
-}
+	type serverConfig interface {
+		GetServerPort() string
+	}
 
-type userInterface interface {
-	ReturnFocus()
-} */
+	type userInterface interface {
+		ReturnFocus() error
+	}
 
+	example :  New(serverConfig, userInterface, exitChan)
+*/
 func New(sc serverConfig, ui userInterface, exitChan chan bool) *DevBrowser {
 
 	browser := &DevBrowser{
