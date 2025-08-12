@@ -4,3 +4,40 @@
 <!-- END_SECTION:BADGES_SECTION -->
 
 A lightweight Go library for launching and controlling web browsers programmatically, designed for automation and development tools.
+
+## Usage
+
+The main entry point is the `New` function, which creates a new browser controller:
+
+```go
+import "github.com/cdvelop/devbrowser"
+
+type myServerConfig struct{}
+func (myServerConfig) GetServerPort() string { return "8080" }
+
+type myUI struct{}
+func (myUI) ReturnFocus() {}
+
+func main() {
+	exitChan := make(chan bool)
+	browser := devbrowser.New(myServerConfig{}, myUI{}, exitChan)
+	err := browser.OpenBrowser()
+	if err != nil {
+		// handle error
+	}
+	// ... use browser ...
+	browser.CloseBrowser()
+}
+```
+
+## Public API
+
+- `New(sc serverConfig, ui userInterface, exitChan chan bool) *DevBrowser`: Create a new DevBrowser instance.
+- `(*DevBrowser) OpenBrowser() error`: Launch a new browser window.
+- `(*DevBrowser) CloseBrowser() error`: Close the browser and clean up resources.
+- `(*DevBrowser) Reload() error`: Reload the current page in the browser.
+- `(*DevBrowser) RestartBrowser() error`: Restart the browser (close and reopen).
+- `(*DevBrowser) BrowserStartUrlChanged(fieldName, oldValue, newValue string) error`: Handle changes to the start URL and restart the browser if open.
+- `(*DevBrowser) BrowserPositionAndSizeChanged(fieldName, oldValue, newValue string) error`: Change the browser window's position and size, and restart the browser.
+- `(*DevBrowser) Name() string` and `(*DevBrowser) Label() string`: For UI integration, returns the component name and label.
+- `(*DevBrowser) Execute(progress func(msgs ...any))`: For UI integration, toggles browser open/close and reports progress.
