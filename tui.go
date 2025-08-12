@@ -28,12 +28,8 @@ func (h *DevBrowser) Execute(progress func(msgs ...any)) {
 
 	} else { // abrir si esta cerrado
 		progress("Opening DevBrowser...")
-		// Simulate opening process
-		if err := h.OpenBrowser(); err != nil {
-			progress("OpenBrowser error:", err)
-		} else {
-			progress("DevBrowser opened successfully.")
-		}
+		h.OpenBrowser()
+
 	}
 
 }

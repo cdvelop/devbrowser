@@ -2,15 +2,14 @@ package devbrowser
 
 import (
 	"context"
-	"errors"
 	"fmt"
 
 	"github.com/chromedp/chromedp"
 )
 
-func (h *DevBrowser) OpenBrowser() error {
+func (h *DevBrowser) OpenBrowser() {
 	if h.isOpen {
-		return errors.New("DevBrowser is already open")
+		return
 	}
 
 	// Add listener for exit signal
@@ -66,10 +65,15 @@ func (h *DevBrowser) OpenBrowser() error {
 	// Esperar señal de inicio o error
 	select {
 	case err := <-h.errChan:
-		return err
+		h.isOpen = false
+		h.logger.Write([]byte("Error opening DevBrowser: " + err.Error()))
+		return
 	case <-h.readyChan:
 		// Tomar el foco de la UI después de abrir el navegador
 		err := h.ui.ReturnFocus()
-		return err
+		if err != nil {
+			h.logger.Write([]byte("Error returning focus to UI: " + err.Error()))
+		}
+		return
 	}
 }

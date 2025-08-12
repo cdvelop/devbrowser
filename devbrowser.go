@@ -3,6 +3,7 @@ package devbrowser
 import (
 	"context"
 	"errors"
+	"io"
 
 	"github.com/chromedp/chromedp"
 )
@@ -22,6 +23,8 @@ type DevBrowser struct {
 	readyChan chan bool
 	errChan   chan error
 	exitChan  chan bool
+
+	logger io.Writer // For logging output
 }
 
 type serverConfig interface {
@@ -45,7 +48,7 @@ devbrowser.New creates a new DevBrowser instance.
 
 	example :  New(serverConfig, userInterface, exitChan)
 */
-func New(sc serverConfig, ui userInterface, exitChan chan bool) *DevBrowser {
+func New(sc serverConfig, ui userInterface, exitChan chan bool, logger io.Writer) *DevBrowser {
 
 	browser := &DevBrowser{
 		config:    sc,
@@ -56,6 +59,7 @@ func New(sc serverConfig, ui userInterface, exitChan chan bool) *DevBrowser {
 		readyChan: make(chan bool),
 		errChan:   make(chan error),
 		exitChan:  exitChan,
+		logger:    logger,
 	}
 	return browser
 }
@@ -78,7 +82,9 @@ func (h *DevBrowser) RestartBrowser() error {
 		return errors.Join(this, err)
 	}
 
-	return h.OpenBrowser()
+	h.OpenBrowser()
+
+	return nil
 }
 
 func (b DevBrowser) sendkeys(host string) chromedp.Tasks {

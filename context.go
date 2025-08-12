@@ -8,10 +8,6 @@ import (
 
 func (h *DevBrowser) CreateBrowserContext() error {
 
-	err := h.setBrowserPositionAndSize("center") // Default position
-	if err != nil {
-		return err
-	}
 	// fmt.Printf("tamaño monitor: [%d] x [%d] BrowserpositionAndSize: [%v]\n", width, height, BrowserpositionAndSize)
 
 	opts := append(
