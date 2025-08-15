@@ -70,10 +70,10 @@ func (h *DevBrowser) OpenBrowser() {
 		return
 	case <-h.readyChan:
 		// Tomar el foco de la UI después de abrir el navegador
-		err := h.ui.ReturnFocus()
+		/* 	err := h.ui.ReturnFocus()
 		if err != nil {
 			h.logger.Write([]byte("Error returning focus to UI: " + err.Error()))
-		}
+		} */
 		return
 	}
 }
