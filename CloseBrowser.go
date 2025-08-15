@@ -1,10 +1,7 @@
 package devbrowser
 
 import (
-	"context"
 	"errors"
-
-	"github.com/chromedp/chromedp"
 )
 
 func (h *DevBrowser) CloseBrowser() error {
@@ -12,24 +9,18 @@ func (h *DevBrowser) CloseBrowser() error {
 		return errors.New("DevBrowser is already closed")
 	}
 
-	// Primero cerrar todas las pestañas/contextos
-	if err := chromedp.Run(h.Context, chromedp.Tasks{
-		chromedp.ActionFunc(func(ctx context.Context) error {
-			return nil
-		}),
-	}); err != nil {
-		return err
-	}
-
-	// Luego cancelar el contexto principal
-	if h.CancelFunc != nil {
-		h.CancelFunc()
+	// Llamar a la función de cancelación personalizada que cierra todos los recursos de Playwright
+	if h.cancelFunc != nil {
+		h.cancelFunc()
 		h.isOpen = false
 	}
 
 	// Limpiar recursos
-	h.Context = nil
-	h.CancelFunc = nil
+	h.playwright = nil
+	h.browser = nil
+	h.context = nil
+	h.page = nil
+	h.cancelFunc = nil
 
 	return nil
 }

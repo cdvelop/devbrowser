@@ -2,15 +2,10 @@ module github.com/cdvelop/devbrowser
 
 go 1.24.4
 
-require github.com/chromedp/chromedp v0.12.1
+require github.com/playwright-community/playwright-go v0.5200.0
 
 require (
-	github.com/chromedp/cdproto v0.0.0-20250120090109-d38428e4d9c8 // indirect
-	github.com/chromedp/sysutil v1.1.0 // indirect
-	github.com/gobwas/httphead v0.1.0 // indirect
-	github.com/gobwas/pool v0.2.1 // indirect
-	github.com/gobwas/ws v1.4.0 // indirect
-	github.com/josharian/intern v1.0.0 // indirect
-	github.com/mailru/easyjson v0.9.0 // indirect
-	golang.org/x/sys v0.29.0 // indirect
+	github.com/deckarep/golang-set/v2 v2.7.0 // indirect
+	github.com/go-jose/go-jose/v3 v3.0.4 // indirect
+	github.com/go-stack/stack v1.8.1 // indirect
 )

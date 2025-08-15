@@ -1,11 +1,10 @@
 package devbrowser
 
 import (
-	"context"
 	"errors"
 	"io"
 
-	"github.com/chromedp/chromedp"
+	"github.com/playwright-community/playwright-go"
 )
 
 type DevBrowser struct {
@@ -17,8 +16,12 @@ type DevBrowser struct {
 
 	isOpen bool // Indica si el navegador está abierto
 
-	context.Context    // Este campo no se codificará en YAML
-	context.CancelFunc // Este campo no se codificará en YAML
+	// Playwright fields
+	playwright *playwright.Playwright
+	browser    playwright.Browser
+	context    playwright.BrowserContext
+	page       playwright.Page
+	cancelFunc func() // Custom cancel function
 
 	readyChan chan bool
 	errChan   chan error
@@ -87,20 +90,22 @@ func (h *DevBrowser) RestartBrowser() error {
 	return nil
 }
 
-func (b DevBrowser) sendkeys(host string) chromedp.Tasks {
-
-	return chromedp.Tasks{
-		chromedp.Navigate(host),
+func (b *DevBrowser) navigateToURL(url string) error {
+	if b.page == nil {
+		return errors.New("page not initialized")
 	}
+
+	_, err := b.page.Goto(url)
+	return err
 }
 
-func (b *DevBrowser) Reload() (err error) {
-	if b.Context != nil && b.isOpen {
+func (b *DevBrowser) Reload() error {
+	if b.page != nil && b.isOpen {
 		// fmt.Println("Recargando Navegador")
-		err = chromedp.Run(b.Context, chromedp.Reload())
+		_, err := b.page.Reload()
 		if err != nil {
 			return errors.New("Reload DevBrowser " + err.Error())
 		}
 	}
-	return
+	return nil
 }

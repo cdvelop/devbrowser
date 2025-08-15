@@ -1,10 +1,8 @@
 package devbrowser
 
 import (
-	"context"
 	"fmt"
-
-	"github.com/chromedp/chromedp"
+	"time"
 )
 
 func (h *DevBrowser) OpenBrowser() {
@@ -29,37 +27,23 @@ func (h *DevBrowser) OpenBrowser() {
 		var protocol = "http"
 		url := protocol + `://localhost:` + h.config.GetServerPort() + "/"
 
-		err = chromedp.Run(h.Context, h.sendkeys(url))
+		// Navegar a la URL
+		_, err = h.page.Goto(url)
 		if err != nil {
 			h.errChan <- fmt.Errorf("error navigating to %s: %v", url, err)
 			return
 		}
 
-		// Verificar carga completa
-		err = chromedp.Run(h.Context, chromedp.ActionFunc(func(ctx context.Context) error {
-			for {
-				var readyState string
-				select {
-
-				case <-ctx.Done():
-					return ctx.Err()
-				default:
-					err := chromedp.Run(ctx, chromedp.EvaluateAsDevTools(`document.readyState`, &readyState))
-					if err != nil {
-						return err
-					}
-
-					if readyState == "complete" {
-						h.readyChan <- true
-						return nil
-					}
-				}
-			}
-		}))
-
+		// Verificar carga completa usando Playwright
+		err = h.page.WaitForLoadState()
 		if err != nil {
 			h.errChan <- err
+			return
 		}
+
+		// Esperar un momento adicional para asegurar que todo esté cargado
+		time.Sleep(100 * time.Millisecond)
+		h.readyChan <- true
 	}()
 
 	// Esperar señal de inicio o error

@@ -1,50 +1,74 @@
 package devbrowser
 
 import (
-	"context"
+	"errors"
 
-	"github.com/chromedp/chromedp"
+	"github.com/playwright-community/playwright-go"
 )
 
 func (h *DevBrowser) CreateBrowserContext() error {
+	// Instalar playwright si no está instalado
+	err := playwright.Install()
+	if err != nil {
+		return errors.New("failed to install Playwright: " + err.Error())
+	}
 
-	// fmt.Printf("tamaño monitor: [%d] x [%d] BrowserpositionAndSize: [%v]\n", width, height, BrowserpositionAndSize)
+	// Crear instancia de playwright
+	h.playwright, err = playwright.Run()
+	if err != nil {
+		return errors.New("failed to run Playwright: " + err.Error())
+	}
 
-	opts := append(
+	// Configurar argumentos del navegador
+	args := []string{
+		"--disable-blink-features=WebFontsInterventionV2", // Remove font warning
+		"--use-fake-ui-for-media-stream",
+		"--no-focus-on-load",
+		"--auto-open-devtools-for-tabs",
+		"--window-position=" + h.position,
+	}
 
-		// select all the elements after the third element
-		chromedp.DefaultExecAllocatorOptions[:],
-		// chromedp.NoDefaultBrowserCheck,
-		chromedp.Flag("headless", false), // Desactivar el modo headless
+	// Configurar opciones del navegador
+	h.browser, err = h.playwright.Chromium.Launch(playwright.BrowserTypeLaunchOptions{
+		Headless: playwright.Bool(false), // Desactivar modo headless
+		Args:     args,
+	})
+	if err != nil {
+		return errors.New("failed to launch browser: " + err.Error())
+	}
 
-		// chromedp.NoFirstRun,
-		// chromedp.NoDefaultBrowserCheck,
+	// Crear contexto del navegador con viewport personalizado
+	h.context, err = h.browser.NewContext(playwright.BrowserNewContextOptions{
+		Viewport: &playwright.Size{
+			Width:  h.width,
+			Height: h.height,
+		},
+	})
+	if err != nil {
+		return errors.New("failed to create browser context: " + err.Error())
+	}
 
-		//quitar mensaje: Chrome is being controlled by automated test software
+	// Crear nueva página
+	h.page, err = h.context.NewPage()
+	if err != nil {
+		return errors.New("failed to create new page: " + err.Error())
+	}
 
-		// chromedp.Flag("--webview-log-js-console-messages", true),
-		chromedp.WindowSize(h.width, h.height),
-		chromedp.Flag("window-position", h.position),
-		// chromedp.WindowSize(1530, 870),
-		// chromedp.Flag("window-position", "1540,0"),
-		chromedp.Flag("use-fake-ui-for-media-stream", true),
-		chromedp.Flag("no-focus-on-load", true),
-		// chromedp.Flag("exclude-switches", "enable-automation"),
-		// chromedp.Flag("disable-blink-features", "AutomationControlled"),
-		// chromedp.NoFirstRun,
-		// chromedp.NoDefaultBrowserCheck,
-		// chromedp.Flag("disable-infobars", true),
-		// chromedp.Flag("enable-automation", true),
-		// chromedp.Flag("disable-infobars", true),
-		// chromedp.Flag("exclude-switches", "disable-infobars"),
-
-		chromedp.Flag("disable-blink-features", "WebFontsInterventionV2"), //remove warning font in console [Intervention] Slow network is detected.
-		chromedp.Flag("auto-open-devtools-for-tabs", true),
-	)
-
-	parentCtx, _ := chromedp.NewExecAllocator(context.Background(), opts...)
-
-	h.Context, h.CancelFunc = chromedp.NewContext(parentCtx)
+	// Función de cancelación personalizada
+	h.cancelFunc = func() {
+		if h.page != nil {
+			h.page.Close()
+		}
+		if h.context != nil {
+			h.context.Close()
+		}
+		if h.browser != nil {
+			h.browser.Close()
+		}
+		if h.playwright != nil {
+			h.playwright.Stop()
+		}
+	}
 
 	return nil
 }
