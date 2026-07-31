@@ -67,6 +67,7 @@ The following Model Context Protocol (MCP) tools are available for browser autom
 | `browser_get_console` | Capture console messages from the loaded page |
 | `browser_emulate_device` | Emulate a mobile or tablet device |
 | `browser_screenshot` | Take a screenshot of the current page |
+| `browser_save_screenshot` | Capture a screenshot and write it as a durable PNG file on disk (with path validation, overwrite prevention, and mutual exclusivity) |
 | `browser_get_content` | Get simplified semantic HTML of the page |
 | `browser_click_element` | Click on an element specified by a selector |
 | `browser_fill_element` | Fill an input field with a value |
@@ -111,3 +112,33 @@ if err != nil {
 		// handle error
 }
 ```
+
+### Saving screenshots directly to disk
+
+The `browser_save_screenshot` tool is designed to produce durable documentation artifacts (such as widget and component reference images) directly on the local filesystem. This tool is isolated to the separate `browser_file` resource type for maximum security and access control.
+
+#### Worked Example: Documenting a Widget Component
+
+1. **Emulate the desired viewport (e.g., desktop):**
+   ```json
+   {
+     "mode": "desktop"
+   }
+   ```
+   *Result:* Sets the emulated device viewport to exactly `1440x900`.
+
+2. **Capture and save a specific component by CSS selector:**
+   ```json
+   {
+     "dir": "./docs/img",
+     "name": "badges",
+     "selector": ".badge-container",
+     "overwrite": true
+   }
+   ```
+   *Result:* Captures only the `.badge-container` element, cleans and resolves the destination directory to an absolute path, creates `docs/img/` if missing, and safely writes the PNG file to `docs/img/badges.png`.
+
+3. **Reference the file in your documentation:**
+   ```markdown
+   <img src="docs/img/badges.png">
+   ```

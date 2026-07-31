@@ -18,6 +18,9 @@ var (
 	permittedFree = model.Permitted{Letters: true, Numbers: true, Spaces: true,
 		Tilde: true, BreakLine: true, Tab: true,
 		Extra: []rune("!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~")}
+	// permittedPath: paths on the filesystem (alphanumeric, spaces, separators, dots, hyphens, underscores).
+	permittedPath = model.Permitted{Letters: true, Numbers: true, Spaces: true,
+		Extra: []rune(`/._-\`)}
 )
 
 var ScreenshotArgsModel = model.Definition{
@@ -167,6 +170,17 @@ var OpenBrowserArgsModel = model.Definition{
 var CloseBrowserArgsModel = model.Definition{
 	Name: "close_browser_args",
 	Fields: model.Fields{},
+}
+
+var SaveScreenshotArgsModel = model.Definition{
+	Name: "save_screenshot_args",
+	Fields: model.Fields{
+		{Name: "dir", Type: model.Text(), NotNull: true, Permitted: permittedPath},
+		{Name: "name", Type: model.Text(), NotNull: true, Permitted: permittedPath},
+		{Name: "selector", Type: model.Text(), Permitted: permittedSelector},
+		{Name: "fullpage", Type: model.Bool()},
+		{Name: "overwrite", Type: model.Bool()},
+	},
 }
 
 type InterceptedRequest struct {
