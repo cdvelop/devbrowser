@@ -130,4 +130,15 @@ func TestDeviceEmulation_ValidationAndDistinctModes(t *testing.T) {
 	if !strings.Contains(resultTextOff, "Device emulation set to off") {
 		t.Errorf("Expected 'Device emulation set to off', got: %s", resultTextOff)
 	}
+
+	// Criterion 2 (Part A): desktop and off must produce DISTINCT branches.
+	// desktop pins 1440x900; off clears the override and reports the real
+	// window size. Asserting the two reported viewports differ catches a
+	// regression where the two modes collapse into the same action list.
+	if strings.Contains(resultTextOff, "viewport 1440x900") {
+		t.Errorf("off must not pin the desktop viewport; desktop and off would be indistinguishable. off reply: %s", resultTextOff)
+	}
+	if !strings.Contains(resultTextOff, "viewport ") {
+		t.Errorf("off reply should still report the resulting viewport (Criterion 6). got: %s", resultTextOff)
+	}
 }
