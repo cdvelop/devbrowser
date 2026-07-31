@@ -9,18 +9,35 @@ import (
 	"github.com/tinywasm/mcp"
 )
 
+const (
+	MobileWidth   = 375
+	MobileHeight  = 812
+	TabletWidth   = 768
+	TabletHeight  = 1024
+	DesktopWidth  = 1440
+	DesktopHeight = 900
+)
+
 func (b *DevBrowser) GetManagementTools() []mcp.Tool {
 	return []mcp.Tool{
 		{
 			Name:        "browser_emulate_device",
 			Description: "Emulate a mobile device or tablet viewport without resizing the physical window. This toggle affects rendering and touch events. This change is persisted.",
-			Args: new(EmulateDeviceArgs),
+			Args:        new(EmulateDeviceArgs),
 			Resource:    "browser",
 			Action:      'u',
 			Execute: func(Ctx *context.Context, req mcp.Request) (*mcp.Result, error) {
 				var args EmulateDeviceArgs
 				if err := req.Bind(&args); err != nil {
 					return nil, err
+				}
+
+				// Validate the mode *before* assigning and saving
+				switch args.Mode {
+				case "mobile", "tablet", "desktop", "off", "":
+					// valid modes
+				default:
+					return nil, fmt.Errorf("unsupported mode: %s", args.Mode)
 				}
 
 				b.Mu.Lock()
@@ -31,14 +48,26 @@ func (b *DevBrowser) GetManagementTools() []mcp.Tool {
 					b.Logger(fmt.Sprintf("Error saving emulation config: %v", err))
 				}
 
+				var actualW, actualH int
 				if b.IsOpen() && b.Ctx != nil {
 					if err := b.applyDeviceEmulation(); err != nil {
 						return nil, err
 					}
 					b.UI.RefreshUI()
+
+					// Read back dimensions dynamically
+					if err := chromedp.Run(b.Ctx,
+						chromedp.Evaluate(`window.innerWidth`, &actualW),
+						chromedp.Evaluate(`window.innerHeight`, &actualH),
+					); err != nil {
+						b.Logger(fmt.Sprintf("Failed to read back viewport: %v", err))
+					}
 				}
 
 				statusMsg := fmt.Sprintf("Device emulation set to %s", args.Mode)
+				if b.IsOpen() && b.Ctx != nil && actualW > 0 && actualH > 0 {
+					statusMsg = fmt.Sprintf("Device emulation set to %s (viewport %dx%d)", args.Mode, actualW, actualH)
+				}
 
 				if args.Capture {
 					var res *ScreenshotResult
@@ -83,15 +112,20 @@ func (b *DevBrowser) applyDeviceEmulation() error {
 	switch mode {
 	case "mobile":
 		actions = append(actions,
-			chromedp.EmulateViewport(375, 812, chromedp.EmulateMobile),
+			chromedp.EmulateViewport(MobileWidth, MobileHeight, chromedp.EmulateMobile),
 			emulation.SetTouchEmulationEnabled(true),
 		)
 	case "tablet":
 		actions = append(actions,
-			chromedp.EmulateViewport(768, 1024, chromedp.EmulateMobile),
+			chromedp.EmulateViewport(TabletWidth, TabletHeight, chromedp.EmulateMobile),
 			emulation.SetTouchEmulationEnabled(true),
 		)
-	case "desktop", "off", "":
+	case "desktop":
+		actions = append(actions,
+			chromedp.EmulateViewport(DesktopWidth, DesktopHeight), // NOT EmulateMobile
+			emulation.SetTouchEmulationEnabled(false),
+		)
+	case "off", "":
 		// Clear overrides by emulating a standard desktop viewport
 		// We use ClearDeviceMetricsOverride to reset to the window size,
 		// allowing the browser layout to adjust naturally to DevTools.

@@ -63,7 +63,7 @@ func (h *DevBrowser) OpenBrowser(port string, https bool) {
 		h.Mu.Lock()
 		mode := h.ViewportMode
 		h.Mu.Unlock()
-		if mode != "" && mode != "off" && mode != "desktop" {
+		if mode != "" && mode != "off" {
 			// We need a context where the page is already loaded or at least ready
 			// but applyDeviceEmulation can be called on the context once it's created.
 			// However, emulation is better applied AFTER navigation or during it.
@@ -101,7 +101,7 @@ func (h *DevBrowser) OpenBrowser(port string, https bool) {
 		h.Mu.Lock()
 		vMode := h.ViewportMode
 		h.Mu.Unlock()
-		if vMode != "" && vMode != "off" && vMode != "desktop" {
+		if vMode != "" && vMode != "off" {
 			if err := h.applyDeviceEmulation(); err != nil {
 				h.Logger(fmt.Sprintf("Failed to restore emulation: %v", err))
 			}
