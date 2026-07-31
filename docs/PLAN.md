@@ -1,8 +1,9 @@
 ---
 PLAN: "desktop must mean desktop, and captures must be able to land in a directory"
 TAG: v0.1.0
-STATUS: running
+STATUS: review
 SESSION: 17762207371060623009
+PR: https://github.com/tinywasm/devbrowser/pull/9
 ---
 
 # Plan — `devbrowser`: a real desktop viewport, and screenshots written to disk
