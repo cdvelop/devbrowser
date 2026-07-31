@@ -1,6 +1,8 @@
 ---
 PLAN: "desktop must mean desktop, and captures must be able to land in a directory"
 TAG: v0.1.0
+STATUS: running
+SESSION: 17762207371060623009
 ---
 
 # Plan — `devbrowser`: a real desktop viewport, and screenshots written to disk
