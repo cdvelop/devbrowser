@@ -59,6 +59,16 @@ if err != nil {
 }
 ```
 
+## Browser engine support
+
+`devbrowser` drives Chromium through CDP. It cannot emulate WebKit/Safari, and
+device emulation reproduces viewport metrics — not the iOS rendering environment.
+Before reopening that discussion, read
+[docs/WEBKIT_PLAN_SUPPORT.md](docs/WEBKIT_PLAN_SUPPORT.md): it covers why CDP and
+WebKit are incompatible, how to tell engine differences apart from device and
+document ones, which library in the ecosystem owns each fix, and what a real
+WebKit backend would cost.
+
 ## MCP Tools
 
 The following Model Context Protocol (MCP) tools are available for browser automation:
