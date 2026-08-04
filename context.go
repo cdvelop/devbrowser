@@ -16,7 +16,6 @@ func (h *DevBrowser) CreateBrowserContext() error {
 		// false omits the switch (map overwrite); CDP still works via
 		// remote-debugging-port.
 		chromedp.Flag("enable-automation", false),
-		chromedp.Flag("disable-blink-features", "WebFontsInterventionV2"),
 		chromedp.Flag("use-fake-ui-for-media-stream", true),
 		// Force the X11 ozone backend. On Linux/Wayland this routes Chrome
 		// through XWayland, which is the ONLY way the window position is
