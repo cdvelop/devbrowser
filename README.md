@@ -46,6 +46,7 @@ func main() {
 	- Default: `false` (shows the browser window). This is convenient for local development and debugging.
 	- Tests: the test helper `DefaultTestBrowser()` configures the returned `DevBrowser` with `headless = true` so unit tests run without requiring a graphical display.
 	- Notes: Call this before `OpenBrowser()` (or before the browser context is created) to ensure the headless flag is applied when launching Chrome/Chromium.
+	- Headed launches suppress Chrome's "controlled by automated test software" infobar by overriding chromedp's default `--enable-automation` (CDP automation is unchanged).
 	- Example:
 
 ```go

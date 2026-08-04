@@ -11,6 +11,11 @@ func (h *DevBrowser) CreateBrowserContext() error {
 	// Create allocator with custom options
 	opts := append(chromedp.DefaultExecAllocatorOptions[:],
 		chromedp.Flag("headless", h.Headless),
+		// chromedp defaults enable-automation=true, which shows the headed
+		// infobar "Chrome is being controlled by automated test software".
+		// false omits the switch (map overwrite); CDP still works via
+		// remote-debugging-port.
+		chromedp.Flag("enable-automation", false),
 		chromedp.Flag("disable-blink-features", "WebFontsInterventionV2"),
 		chromedp.Flag("use-fake-ui-for-media-stream", true),
 		// Force the X11 ozone backend. On Linux/Wayland this routes Chrome
