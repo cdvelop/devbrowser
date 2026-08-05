@@ -10,6 +10,7 @@ const (
 	StoreKeyBrowserPosition  = "browser_position"
 	StoreKeyBrowserSize      = "browser_size"
 	StoreKeyViewportMode     = "viewport_mode"
+	StoreKeyViewportDevice   = "viewport_device"
 )
 
 // LoadConfig loads all browser configuration from the store
@@ -56,6 +57,11 @@ func (b *DevBrowser) LoadConfig() {
 	if mode, err := b.DB.Get(StoreKeyViewportMode); err == nil && mode != "" {
 		b.ViewportMode = mode
 	}
+
+	// Load viewport device
+	if device, err := b.DB.Get(StoreKeyViewportDevice); err == nil && device != "" {
+		b.ViewportDevice = device
+	}
 }
 
 // SaveConfig saves all browser configuration to the store
@@ -82,6 +88,11 @@ func (b *DevBrowser) SaveConfig() error {
 
 	// Save viewport mode
 	if err := b.DB.Set(StoreKeyViewportMode, b.ViewportMode); err != nil {
+		return err
+	}
+
+	// Save viewport device
+	if err := b.DB.Set(StoreKeyViewportDevice, b.ViewportDevice); err != nil {
 		return err
 	}
 

@@ -59,17 +59,6 @@ func (h *DevBrowser) OpenBrowser(port string, https bool) {
 			return
 		}
 
-		// Restore device emulation if set
-		h.Mu.Lock()
-		mode := h.ViewportMode
-		h.Mu.Unlock()
-		if mode != "" && mode != "off" {
-			// We need a context where the page is already loaded or at least ready
-			// but applyDeviceEmulation can be called on the context once it's created.
-			// However, emulation is better applied AFTER navigation or during it.
-			// Page load might reset viewport in some cases, but CDP overrides usually persist.
-		}
-
 		protocol := "http"
 		if https {
 			protocol = "https"

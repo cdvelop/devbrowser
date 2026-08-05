@@ -119,6 +119,7 @@ func (m *NavigateArgs) Validate(action byte) error {
 
 type EmulateDeviceArgs struct {
 	Mode string
+	Device string
 	Capture bool
 	Selector string
 }
@@ -127,18 +128,20 @@ func (m *EmulateDeviceArgs) ModelName() string { return "emulate_device_args" }
 
 func (m *EmulateDeviceArgs) Schema() []model.Field { return EmulateDeviceArgsModel.Fields }
 
-func (m *EmulateDeviceArgs) Pointers() []any { return []any{&m.Mode, &m.Capture, &m.Selector} }
+func (m *EmulateDeviceArgs) Pointers() []any { return []any{&m.Mode, &m.Device, &m.Capture, &m.Selector} }
 
 func (m *EmulateDeviceArgs) IsNil() bool { return m == nil }
 
 func (m *EmulateDeviceArgs) EncodeFields(w model.FieldWriter) {
 	w.String("mode", m.Mode)
+	w.String("device", m.Device)
 	w.Bool("capture", m.Capture)
 	w.String("selector", m.Selector)
 }
 
 func (m *EmulateDeviceArgs) DecodeFields(r model.FieldReader) {
 	if v, ok := r.String("mode"); ok { m.Mode = v }
+	if v, ok := r.String("device"); ok { m.Device = v }
 	if v, ok := r.Bool("capture"); ok { m.Capture = v }
 	if v, ok := r.String("selector"); ok { m.Selector = v }
 }
@@ -155,6 +158,41 @@ func (s *EmulateDeviceArgsList) EncodeFields(_ model.FieldWriter) {}
 func (s *EmulateDeviceArgsList) DecodeFields(_ model.FieldReader) {}
 
 func (m *EmulateDeviceArgs) Validate(action byte) error {
+	return model.ValidateFields(action, m)
+}
+
+type AuditMobileArgs struct {
+	Selector string
+}
+
+func (m *AuditMobileArgs) ModelName() string { return "audit_mobile_args" }
+
+func (m *AuditMobileArgs) Schema() []model.Field { return AuditMobileArgsModel.Fields }
+
+func (m *AuditMobileArgs) Pointers() []any { return []any{&m.Selector} }
+
+func (m *AuditMobileArgs) IsNil() bool { return m == nil }
+
+func (m *AuditMobileArgs) EncodeFields(w model.FieldWriter) {
+	w.String("selector", m.Selector)
+}
+
+func (m *AuditMobileArgs) DecodeFields(r model.FieldReader) {
+	if v, ok := r.String("selector"); ok { m.Selector = v }
+}
+
+type AuditMobileArgsList []*AuditMobileArgs
+
+func (s *AuditMobileArgsList) Schema() []model.Field { return nil }
+func (s *AuditMobileArgsList) Pointers() []any     { return nil }
+func (s *AuditMobileArgsList) Len() int             { return len(*s) }
+func (s *AuditMobileArgsList) At(i int) model.Fielder { return (*s)[i] }
+func (s *AuditMobileArgsList) Append() model.Fielder  { v := &AuditMobileArgs{}; *s = append(*s, v); return v }
+func (s *AuditMobileArgsList) IsNil() bool          { return s == nil }
+func (s *AuditMobileArgsList) EncodeFields(_ model.FieldWriter) {}
+func (s *AuditMobileArgsList) DecodeFields(_ model.FieldReader) {}
+
+func (m *AuditMobileArgs) Validate(action byte) error {
 	return model.ValidateFields(action, m)
 }
 

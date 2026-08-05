@@ -50,7 +50,15 @@ var EmulateDeviceArgsModel = model.Definition{
 	Name: "emulate_device_args",
 	Fields: model.Fields{
 		{Name: "mode", Type: model.Text()},
+		{Name: "device", Type: model.Text(), Permitted: permittedSelector},
 		{Name: "capture", Type: model.Bool()},
+		{Name: "selector", Type: model.Text(), Permitted: permittedSelector},
+	},
+}
+
+var AuditMobileArgsModel = model.Definition{
+	Name: "audit_mobile_args",
+	Fields: model.Fields{
 		{Name: "selector", Type: model.Text(), Permitted: permittedSelector},
 	},
 }

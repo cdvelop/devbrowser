@@ -30,6 +30,7 @@ type DevBrowser struct {
 	MonitorHeight  int    // Detected monitor availability height
 	SizeConfigured bool   // Track if size was loaded from storage
 	ViewportMode   string // Current emulation mode ("mobile", "tablet", "desktop", "off", "")
+	ViewportDevice string // Current emulation device name (e.g. "iphone15promax")
 	FirstCall      bool   // Internal flag to track if OpenBrowser was called for the first time
 	OpenedOnce     bool   // Internal flag to track if browser was actually opened at least once
 
