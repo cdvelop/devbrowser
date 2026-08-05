@@ -1,8 +1,6 @@
 ---
 PLAN: "feat: emulación de dispositivo fiel + auditoría móvil"
-TAG: v0.2.0
-EXECUTOR: none
-REVIEWER: none
+TAG: v0.6.0
 ---
 
 > Plan autocontenido. Todo lo necesario para ejecutarlo está en este documento.
