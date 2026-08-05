@@ -1,8 +1,9 @@
 ---
 PLAN: "feat: emulación de dispositivo fiel + auditoría móvil"
 TAG: v0.6.0
-STATUS: running
+STATUS: review
 SESSION: 3895100800956017705
+PR: https://github.com/tinywasm/devbrowser/pull/11
 ---
 
 > Plan autocontenido. Todo lo necesario para ejecutarlo está en este documento.
