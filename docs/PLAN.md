@@ -1,6 +1,8 @@
 ---
 PLAN: "feat: emulación de dispositivo fiel + auditoría móvil"
 TAG: v0.6.0
+STATUS: running
+SESSION: 3895100800956017705
 ---
 
 > Plan autocontenido. Todo lo necesario para ejecutarlo está en este documento.
