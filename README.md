@@ -76,7 +76,8 @@ The following Model Context Protocol (MCP) tools are available for browser autom
 | Tool | Description |
 |---|---|
 | `browser_get_console` | Capture console messages from the loaded page |
-| `browser_emulate_device` | Emulate a mobile or tablet device |
+| `browser_emulate_device` | Emulate a mobile, tablet, or custom device (with real DPR, UA, viewport, and touch emulation) |
+| `browser_audit_mobile` | Run mobile compatibility audits (notch safe-areas, DVH/SVH units, auto-zoom, tap sizes) |
 | `browser_screenshot` | Take a screenshot of the current page |
 | `browser_save_screenshot` | Capture a screenshot and write it as a durable PNG file on disk (with path validation, overwrite prevention, and mutual exclusivity) |
 | `browser_get_content` | Get simplified semantic HTML of the page |
@@ -123,6 +124,36 @@ if err != nil {
 		// handle error
 }
 ```
+
+### Device Emulation & Mobile Auditing
+
+`devbrowser` provides robust device emulation to bridge the gap between emulated views and physical devices.
+
+#### Precise Device Emulation
+
+The `browser_emulate_device` tool accepts two main arguments:
+- `mode`: `"mobile"` (defaults to iPhone 15 Pro Max), `"tablet"` (defaults to iPad Pro), `"desktop"` (pins to `1440x900`), or `"off"` (clears overrides).
+- `device`: Optional custom device name (e.g., `"iPhone 14 Pro Max"`, `"Pixel 5"`). This matches the name in lowercase and without spaces/symbols. If a name is unknown, the tool returns an error listing all available device names from the 131-device catalog.
+
+When emulating a specific device from the catalog, `devbrowser` automatically configures:
+1. **Device Pixel Ratio (DPR)** (e.g., `3.0` for iPhone 15 Pro Max) for crisp screenshots, `@media` query matching, and correct `srcset` selection.
+2. **Real User-Agent (UA) Override** to ensure server-side or client-side UA routing works correctly.
+3. **Viewport visible dimensions** (the height takes active browser bars into account).
+4. **Touch Emulation** to correctly enable mobile gesture handlers.
+
+#### What Cannot Be Emulated (And How to Audit)
+
+Due to protocol limits, certain iOS/Safari behaviors cannot be directly simulated in Chromium:
+- `safe-area-inset-*` (notch and home gestural bars) cannot be emulated.
+- Dynamic viewport height shrinkage (`100vh` behavior) and Safari-specific fonts/inputs are not available.
+
+To detect these and other common mobile layout defects, use **`browser_audit_mobile`**. It scans the DOM and stylesheets to check for:
+- **`viewport-meta`**: Missing `<meta name="viewport">` or missing `viewport-fit=cover`.
+- **`vh-units`**: Elements using raw `vh` units instead of dynamic viewports like `dvh` or `svh` (which can overflow or shift layout as browser controls hide).
+- **`safe-area`**: Fixed elements at edges lacking safe-area insets.
+- **`input-zoom`**: Input/Select fields with font-size `< 16px` (which triggers iOS Safari's annoying layout-shifting zoom on focus).
+- **`tap-target`**: Interactive elements smaller than the standard `44x44` px touch target.
+- **`fixed-vh`**: Fixed position elements using `vh` heights (the worst layout shifter on scroll).
 
 ### Saving screenshots directly to disk
 

@@ -2,18 +2,17 @@ package devbrowser
 
 import (
 	"fmt"
+	"reflect"
+	"strings"
 
 	"github.com/tinywasm/context"
 	"github.com/tinywasm/devbrowser/cdproto/emulation"
 	"github.com/tinywasm/devbrowser/chromedp"
+	"github.com/tinywasm/devbrowser/chromedp/device"
 	"github.com/tinywasm/mcp"
 )
 
 const (
-	MobileWidth   = 375
-	MobileHeight  = 812
-	TabletWidth   = 768
-	TabletHeight  = 1024
 	DesktopWidth  = 1440
 	DesktopHeight = 900
 )
@@ -32,6 +31,17 @@ func (b *DevBrowser) GetManagementTools() []mcp.Tool {
 					return nil, err
 				}
 
+				// Validate the mode and device *before* assigning and saving
+				var avail []string
+				var err error
+
+				if args.Device != "" {
+					_, avail, err = resolveDevice(args.Device)
+					if err != nil {
+						return nil, fmt.Errorf("unsupported device: %s. Available devices: %s", args.Device, strings.Join(avail, ", "))
+					}
+				}
+
 				// Validate the mode *before* assigning and saving
 				switch args.Mode {
 				case "mobile", "tablet", "desktop", "off", "":
@@ -42,6 +52,7 @@ func (b *DevBrowser) GetManagementTools() []mcp.Tool {
 
 				b.Mu.Lock()
 				b.ViewportMode = args.Mode
+				b.ViewportDevice = args.Device
 				b.Mu.Unlock()
 
 				if err := b.SaveConfig(); err != nil {
@@ -64,9 +75,13 @@ func (b *DevBrowser) GetManagementTools() []mcp.Tool {
 					}
 				}
 
-				statusMsg := fmt.Sprintf("Device emulation set to %s", args.Mode)
+				emulationName := args.Mode
+				if args.Device != "" {
+					emulationName = args.Device
+				}
+				statusMsg := fmt.Sprintf("Device emulation set to %s", emulationName)
 				if b.IsOpen() && b.Ctx != nil && actualW > 0 && actualH > 0 {
-					statusMsg = fmt.Sprintf("Device emulation set to %s (viewport %dx%d)", args.Mode, actualW, actualH)
+					statusMsg = fmt.Sprintf("Device emulation set to %s (viewport %dx%d)", emulationName, actualW, actualH)
 				}
 
 				if args.Capture {
@@ -101,41 +116,80 @@ func (b *DevBrowser) GetManagementTools() []mcp.Tool {
 	}
 }
 
-// applyDeviceEmulation applies the current b.ViewportMode using CDP emulation commands.
+// applyDeviceEmulation applies the current b.ViewportMode or b.ViewportDevice using CDP emulation commands.
 func (b *DevBrowser) applyDeviceEmulation() error {
 	b.Mu.Lock()
 	mode := b.ViewportMode
+	devName := b.ViewportDevice
 	b.Mu.Unlock()
 
 	var actions []chromedp.Action
 
-	switch mode {
-	case "mobile":
-		actions = append(actions,
-			chromedp.EmulateViewport(MobileWidth, MobileHeight, chromedp.EmulateMobile),
-			emulation.SetTouchEmulationEnabled(true),
-		)
-	case "tablet":
-		actions = append(actions,
-			chromedp.EmulateViewport(TabletWidth, TabletHeight, chromedp.EmulateMobile),
-			emulation.SetTouchEmulationEnabled(true),
-		)
-	case "desktop":
-		actions = append(actions,
-			chromedp.EmulateViewport(DesktopWidth, DesktopHeight), // NOT EmulateMobile
-			emulation.SetTouchEmulationEnabled(false),
-		)
-	case "off", "":
-		// Clear overrides by emulating a standard desktop viewport
-		// We use ClearDeviceMetricsOverride to reset to the window size,
-		// allowing the browser layout to adjust naturally to DevTools.
-		actions = append(actions,
-			emulation.ClearDeviceMetricsOverride(),
-			emulation.SetTouchEmulationEnabled(false),
-		)
-	default:
-		return fmt.Errorf("unsupported mode: %s", mode)
+	if devName != "" {
+		d, _, err := resolveDevice(devName)
+		if err != nil {
+			return err
+		}
+		actions = append(actions, chromedp.Emulate(d))
+	} else {
+		switch mode {
+		case "mobile":
+			actions = append(actions, chromedp.Emulate(device.IPhone15ProMax))
+		case "tablet":
+			actions = append(actions, chromedp.Emulate(device.IPadPro))
+		case "desktop":
+			actions = append(actions,
+				chromedp.EmulateViewport(DesktopWidth, DesktopHeight), // NOT EmulateMobile
+				emulation.SetTouchEmulationEnabled(false),
+			)
+		case "off", "":
+			// Clear overrides by emulating a standard desktop viewport
+			// We use ClearDeviceMetricsOverride to reset to the window size,
+			// allowing the browser layout to adjust naturally to DevTools.
+			actions = append(actions,
+				emulation.ClearDeviceMetricsOverride(),
+				emulation.SetTouchEmulationEnabled(false),
+				emulation.SetUserAgentOverride(""),
+			)
+		default:
+			return fmt.Errorf("unsupported mode: %s", mode)
+		}
 	}
 
 	return chromedp.Run(b.Ctx, actions...)
+}
+
+// normalizeName removes spaces, dashes, parentheses, underscores, and lowercase the string.
+func normalizeName(name string) string {
+	name = strings.ToLower(name)
+	name = strings.ReplaceAll(name, " ", "")
+	name = strings.ReplaceAll(name, "-", "")
+	name = strings.ReplaceAll(name, "(", "")
+	name = strings.ReplaceAll(name, ")", "")
+	name = strings.ReplaceAll(name, "_", "")
+	name = strings.ReplaceAll(name, "+", "")
+	return name
+}
+
+// resolveDevice finds a device by normalising its name.
+// If not found, it returns a list of all available device names.
+func resolveDevice(target string) (chromedp.Device, []string, error) {
+	normTarget := normalizeName(target)
+	rt := reflect.TypeOf(device.Reset)
+	var available []string
+
+	for i := 1; i <= 131; i++ {
+		v := reflect.ValueOf(i).Convert(rt)
+		d := v.Interface().(chromedp.Device)
+		info := d.Device()
+		if info.Name == "" {
+			continue
+		}
+		available = append(available, info.Name)
+		if normalizeName(info.Name) == normTarget {
+			return d, nil, nil
+		}
+	}
+
+	return nil, available, fmt.Errorf("unsupported device: %s", target)
 }

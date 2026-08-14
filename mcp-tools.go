@@ -24,6 +24,7 @@ func (b *DevBrowser) GetMCPTools() []mcp.Tool {
 	tools = append(tools, b.GetNavigationTools()...)
 	tools = append(tools, b.GetInspectTools()...)
 	tools = append(tools, b.GetPerformanceTools()...)
+	tools = append(tools, b.GetAuditTools()...)
 	tools = append(tools, b.GetSourceTools()...)
 	tools = append(tools, b.GetStylesTools()...)
 	tools = append(tools, b.GetStorageTools()...)

@@ -30,6 +30,7 @@ func TestGetMCPToolsMetadata_AllToolsRegistered(t *testing.T) {
 		"browser_get_asset",
 		"browser_intercept_request",
 		"browser_save_screenshot",
+		"browser_audit_mobile",
 	}
 
 	if len(tools) != len(expectedToolNames) {
