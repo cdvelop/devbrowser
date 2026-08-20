@@ -2,8 +2,9 @@
 PLAN: "fix: recarga pendiente durante apertura + ventana que crece para caber la emulación de dispositivo"
 EXECUTOR: jules
 REVIEWER: none
-STATUS: running
+STATUS: review
 SESSION: 16436170586368041481
+PR: https://github.com/tinywasm/devbrowser/pull/12
 ---
 
 # PLAN — cola de ejecución para `devbrowser`
