@@ -29,6 +29,15 @@ type DevBrowser struct {
 	MonitorWidth   int    // Detected monitor availability width
 	MonitorHeight  int    // Detected monitor availability height
 	SizeConfigured bool   // Track if size was loaded from storage
+
+	// DevToolsReserved is true when auto-open-devtools-for-tabs was launched
+	// for this session (context.go decides this once, at CreateBrowserContext
+	// time, based on the window width at launch). Later window growth does not
+	// retroactively open or close DevTools, so this flag is a session-long
+	// snapshot, not a live query — CDP exposes no way to read DevTools' actual
+	// panel bounds.
+	DevToolsReserved bool
+
 	ViewportMode   string // Current emulation mode ("mobile", "tablet", "desktop", "off", "")
 	ViewportDevice string // Current emulation device name (e.g. "iphone15promax")
 	FirstCall      bool   // Internal flag to track if OpenBrowser was called for the first time
@@ -45,6 +54,11 @@ type DevBrowser struct {
 	// running an action (e.g. Reload) on the context before the first allocation
 	// returns makes chromedp allocate a SECOND browser -> double window.
 	ready bool
+
+	// pendingReload remembers that a reload was requested while the browser
+	// was still opening. Discarding that request left the initial rendered content
+	// in an incomplete state until manual reload.
+	pendingReload bool
 
 	DB Store // Key-value store para configuración y estado
 
@@ -225,16 +239,18 @@ func (b *DevBrowser) Reload() error {
 	// Gate on `ready`, not IsOpenFlag: during startup the file watcher can fire
 	// a reload while the initial open is still allocating the browser. Running
 	// chromedp.Run on the not-yet-allocated context would spawn a SECOND Chrome
-	// (the about:blank "double window"). The initial Navigate already shows the
-	// current content, so a reload before ready is redundant — skip it.
+	// (the about:blank "double window").
 	b.Mu.Lock()
 	ready := b.ready && b.Ctx != nil && b.IsOpenFlag
-	b.Mu.Unlock()
-
 	if !ready {
-		b.Logger("Reload skipped: browser still opening")
+		if b.IsOpenFlag {
+			b.pendingReload = true
+		}
+		b.Mu.Unlock()
+		b.Logger("Reload pendiente: el navegador aún se está abriendo")
 		return nil
 	}
+	b.Mu.Unlock()
 
 	b.Logger("Reload")
 	if err := chromedp.Run(b.Ctx, chromedp.Reload()); err != nil {
@@ -298,6 +314,38 @@ func (b *DevBrowser) monitorBrowserClose() {
 
 func (b *DevBrowser) IsOpen() bool {
 	return b.IsOpenFlag
+}
+
+func (b *DevBrowser) IsPendingReload() bool {
+	b.Mu.Lock()
+	defer b.Mu.Unlock()
+	return b.pendingReload
+}
+
+func (b *DevBrowser) IsReady() bool {
+	b.Mu.Lock()
+	defer b.Mu.Unlock()
+	return b.ready
+}
+
+func (b *DevBrowser) SetReadyForTest(ready bool) {
+	b.Mu.Lock()
+	defer b.Mu.Unlock()
+	b.ready = ready
+}
+
+func (b *DevBrowser) ProcessPendingReload() {
+	b.Mu.Lock()
+	pending := b.pendingReload
+	b.pendingReload = false
+	b.Mu.Unlock()
+
+	if pending {
+		b.Logger("Aplicando la recarga pendiente")
+		if err := b.Reload(); err != nil {
+			b.Logger("Recarga pendiente fallida:", err)
+		}
+	}
 }
 
 func (b *DevBrowser) InitializeConsoleCapture() error {

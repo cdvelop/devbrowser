@@ -142,3 +142,47 @@ func TestDeviceEmulation_ValidationAndDistinctModes(t *testing.T) {
 		t.Errorf("off reply should still report the resulting viewport (Criterion 6). got: %s", resultTextOff)
 	}
 }
+
+func TestEmulationViewportSize_Modes(t *testing.T) {
+	tests := []struct {
+		mode    string
+		wantW   int
+		wantH   int
+		wantErr bool
+	}{
+		{"mobile", 430, 739, false},
+		{"tablet", 1024, 1366, false},
+		{"desktop", 1440, 900, false},
+		{"off", 0, 0, false},
+		{"", 0, 0, false},
+		{"unknown_mode", 0, 0, true},
+	}
+
+	for _, tt := range tests {
+		w, h, err := devbrowser.EmulationViewportSize(tt.mode, "")
+		if (err != nil) != tt.wantErr {
+			t.Errorf("EmulationViewportSize(%q, \"\") error = %v, wantErr %v", tt.mode, err, tt.wantErr)
+			continue
+		}
+		if !tt.wantErr {
+			if w != tt.wantW || h != tt.wantH {
+				t.Errorf("EmulationViewportSize(%q, \"\") = (%d, %d), want (%d, %d)", tt.mode, w, h, tt.wantW, tt.wantH)
+			}
+		}
+	}
+}
+
+func TestEmulationViewportSize_NamedDevice(t *testing.T) {
+	w, h, err := devbrowser.EmulationViewportSize("", "iphone15promax")
+	if err != nil {
+		t.Fatalf("EmulationViewportSize(\"\", \"iphone15promax\") failed: %v", err)
+	}
+	if w <= 0 || h <= 0 {
+		t.Errorf("Expected positive dimensions for iphone15promax, got %dx%d", w, h)
+	}
+
+	_, _, errInvalid := devbrowser.EmulationViewportSize("", "nonexistent_device_xyz")
+	if errInvalid == nil {
+		t.Error("Expected error for nonexistent device name, got nil")
+	}
+}

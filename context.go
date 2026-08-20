@@ -28,7 +28,8 @@ func (h *DevBrowser) CreateBrowserContext() error {
 	)
 
 	// Conditionally add devtools flag
-	if h.Width > 1200 {
+	h.DevToolsReserved = h.Width > 1200
+	if h.DevToolsReserved {
 		opts = append(opts, chromedp.Flag("auto-open-devtools-for-tabs", true))
 	}
 
