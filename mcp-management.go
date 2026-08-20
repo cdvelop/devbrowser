@@ -21,7 +21,7 @@ func (b *DevBrowser) GetManagementTools() []mcp.Tool {
 	return []mcp.Tool{
 		{
 			Name:        "browser_emulate_device",
-			Description: "Emulate a mobile device or tablet viewport without resizing the physical window. This toggle affects rendering and touch events. This change is persisted.",
+			Description: "Emulate a mobile device, tablet, or named device viewport. Also grows the physical window live (never shrinks) so the requested viewport is fully visible instead of being covered by DevTools — window position and any pre-existing size are preserved as a floor. This toggle affects rendering and touch events. This change is persisted.",
 			Args:        new(EmulateDeviceArgs),
 			Resource:    "browser",
 			Action:      'u',
@@ -61,6 +61,12 @@ func (b *DevBrowser) GetManagementTools() []mcp.Tool {
 
 				var actualW, actualH int
 				if b.IsOpen() && b.Ctx != nil {
+					if reqW, reqH, _ := EmulationViewportSize(args.Mode, args.Device); reqW > 0 && reqH > 0 {
+						if _, err := b.GrowWindowToFit(reqW, reqH); err != nil {
+							b.Logger(fmt.Sprintf("Failed to grow window for emulation: %v", err))
+						}
+					}
+
 					if err := b.applyDeviceEmulation(); err != nil {
 						return nil, err
 					}
@@ -157,6 +163,37 @@ func (b *DevBrowser) applyDeviceEmulation() error {
 	}
 
 	return chromedp.Run(b.Ctx, actions...)
+}
+
+// EmulationViewportSize returns the CSS pixel viewport size that mode/devName
+// will render at once applied by applyDeviceEmulation, so the physical
+// window can be grown to fit BEFORE the CDP emulation override is issued.
+// Keep this in sync with the switch in applyDeviceEmulation — same modes,
+// same device shortcuts.
+func EmulationViewportSize(mode, devName string) (int, int, error) {
+	if devName != "" {
+		d, _, err := resolveDevice(devName)
+		if err != nil {
+			return 0, 0, err
+		}
+		info := d.Device()
+		return int(info.Width), int(info.Height), nil
+	}
+
+	switch mode {
+	case "mobile":
+		info := device.IPhone15ProMax.Device()
+		return int(info.Width), int(info.Height), nil
+	case "tablet":
+		info := device.IPadPro.Device()
+		return int(info.Width), int(info.Height), nil
+	case "desktop":
+		return DesktopWidth, DesktopHeight, nil
+	case "off", "":
+		return 0, 0, nil
+	default:
+		return 0, 0, fmt.Errorf("unsupported mode: %s", mode)
+	}
 }
 
 // normalizeName removes spaces, dashes, parentheses, underscores, and lowercase the string.

@@ -14,6 +14,7 @@ func (h *DevBrowser) CloseBrowser() error {
 
 	h.IsOpenFlag = false
 	h.ready = false
+	h.pendingReload = false
 
 	if h.Cancel != nil {
 		h.Cancel()

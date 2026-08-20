@@ -94,6 +94,55 @@ func (b *DevBrowser) StartWithDetectedSize() {
 	b.Log(fmt.Sprintf("Browser size auto-adjusted to monitor: %dx%d", newW, newH))
 }
 
+// DevToolsReservedWidth is a conservative, documented ESTIMATE of the
+// horizontal space Chrome's docked DevTools panel occupies when auto-opened
+// via auto-open-devtools-for-tabs (see context.go). CDP exposes no command to
+// read the panel's actual bounds, so this value is fixed and deliberately
+// generous rather than pixel-exact — it assumes DevTools docks to the right,
+// which only happens for the wide windows that trigger the auto-open in the
+// first place (see §7 of docs/PLAN_WINDOW_AUTOFIT.md for the bottom-dock
+// case this does not cover).
+const DevToolsReservedWidth = 420
+
+// RequiredWindowSize returns the physical window size needed to show a
+// requested viewport of (reqW, reqH) without DevTools covering any of it,
+// clamped to the detected monitor. It never returns less than the window's
+// current size: growth is one-directional, the existing window size is a
+// floor. If the monitor size has not been detected yet, it is detected now
+// (mirrors the lazy-detect in GetPresetSize).
+func (b *DevBrowser) RequiredWindowSize(reqW, reqH int) (int, int) {
+	b.Mu.Lock()
+	monW, monH := b.MonitorWidth, b.MonitorHeight
+	b.Mu.Unlock()
+
+	if monW == 0 || monH == 0 {
+		b.DetectMonitorSize()
+		b.Mu.Lock()
+		monW, monH = b.MonitorWidth, b.MonitorHeight
+		b.Mu.Unlock()
+	}
+
+	b.Mu.Lock()
+	curW, curH := b.Width, b.Height
+	reserved := b.DevToolsReserved
+	b.Mu.Unlock()
+
+	neededW := reqW
+	if reserved {
+		neededW += DevToolsReservedWidth
+	}
+	neededH := reqH
+
+	if neededW < curW {
+		neededW = curW
+	}
+	if neededH < curH {
+		neededH = curH
+	}
+
+	return b.CalculateConstrainedSize(neededW, neededH, monW, monH)
+}
+
 // getPresetSize calculates the optimal dimensions for a requested preset mode.
 // It uses predefined base sizes but ensures they fit within the current monitor constraints.
 func (b *DevBrowser) GetPresetSize(mode string) (int, int, error) {

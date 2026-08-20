@@ -129,7 +129,7 @@ if err != nil {
 
 `devbrowser` provides robust device emulation to bridge the gap between emulated views and physical devices.
 
-#### Precise Device Emulation
+#### Precise Device Emulation & Live Window Auto-fit
 
 The `browser_emulate_device` tool accepts two main arguments:
 - `mode`: `"mobile"` (defaults to iPhone 15 Pro Max), `"tablet"` (defaults to iPad Pro), `"desktop"` (pins to `1440x900`), or `"off"` (clears overrides).
@@ -140,6 +140,7 @@ When emulating a specific device from the catalog, `devbrowser` automatically co
 2. **Real User-Agent (UA) Override** to ensure server-side or client-side UA routing works correctly.
 3. **Viewport visible dimensions** (the height takes active browser bars into account).
 4. **Touch Emulation** to correctly enable mobile gesture handlers.
+5. **Live Window Auto-fit**: If the requested viewport exceeds the current physical window bounds, `devbrowser` resizes the browser window live using CDP `Browser.setWindowBounds` (without restarting Chrome). Position and existing size are preserved as a floor (the window never shrinks automatically). When DevTools is docked on the side (auto-opened for launch widths > 1200px), an estimated reserved width of 420px is included so DevTools does not obscure the emulated viewport.
 
 #### What Cannot Be Emulated (And How to Audit)
 
