@@ -2,6 +2,8 @@
 PLAN: "fix: recarga pendiente durante apertura + ventana que crece para caber la emulación de dispositivo"
 EXECUTOR: jules
 REVIEWER: none
+STATUS: running
+SESSION: 16436170586368041481
 ---
 
 # PLAN — cola de ejecución para `devbrowser`
