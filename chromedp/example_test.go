@@ -1,3 +1,11 @@
+// These are upstream chromedp demo examples, excluded from normal runs.
+// All 17 launch a real Chrome, and three drive live third-party sites
+// (duckduckgo.com, google.com, pkg.go.dev). DuckDuckGo removed the
+// #zci-answer element ExampleEmulate waits for, so that example blocks
+// until the test binary's timeout — hanging the whole suite. Run them
+// deliberately with: go test -tags chromedp_examples ./chromedp/
+//go:build chromedp_examples
+
 package chromedp_test
 
 import (

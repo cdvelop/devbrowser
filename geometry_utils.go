@@ -100,8 +100,9 @@ func (b *DevBrowser) StartWithDetectedSize() {
 // read the panel's actual bounds, so this value is fixed and deliberately
 // generous rather than pixel-exact — it assumes DevTools docks to the right,
 // which only happens for the wide windows that trigger the auto-open in the
-// first place (see §7 of docs/PLAN_WINDOW_AUTOFIT.md for the bottom-dock
-// case this does not cover).
+// first place. DevTools docked to the bottom is deliberately NOT modelled:
+// that layout costs height rather than width, and the auto-open condition
+// never fires for the narrow windows where Chrome docks it there.
 const DevToolsReservedWidth = 420
 
 // RequiredWindowSize returns the physical window size needed to show a
