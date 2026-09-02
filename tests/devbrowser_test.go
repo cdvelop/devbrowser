@@ -18,13 +18,16 @@ func TestNewDefaults(t *testing.T) {
 	}
 }
 
-func TestCloseBrowserWhenClosed(t *testing.T) {
+func TestCloseBrowserIsIdempotent(t *testing.T) {
 	db, _ := DefaultTestBrowser()
 	// Ensure isOpen is false by default
 	if db.IsOpenFlag {
 		t.Fatal("expected isOpen false by default")
 	}
-	if err := db.CloseBrowser(); err == nil {
-		t.Fatal("expected CloseBrowser to return error when already closed")
+	if err := db.CloseBrowser(); err != nil {
+		t.Fatalf("CloseBrowser on a closed browser must be a no-op, got %v", err)
+	}
+	if err := db.CloseBrowser(); err != nil {
+		t.Fatalf("second CloseBrowser must also be a no-op, got %v", err)
 	}
 }

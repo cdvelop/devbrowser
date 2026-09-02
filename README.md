@@ -33,7 +33,7 @@ func main() {
 
 - `New(sc serverConfig, ui userInterface, exitChan chan bool) *DevBrowser`: Create a new DevBrowser instance.
 - `(*DevBrowser) OpenBrowser() error`: Launch a new browser window.
-- `(*DevBrowser) CloseBrowser() error`: Close the browser and clean up resources.
+- `(*DevBrowser) CloseBrowser() error`: Close the browser and clean up resources. Safe to call unconditionally (idempotent, returns `nil` if already closed).
 - `(*DevBrowser) Reload() error`: Reload the current page in the browser.
 - `(*DevBrowser) RestartBrowser() error`: Restart the browser (close and reopen).
 - `(*DevBrowser) BrowserStartUrlChanged(fieldName, oldValue, newValue string) error`: Handle changes to the start URL and restart the browser if open.
@@ -58,6 +58,28 @@ if err != nil {
 		// handle error
 }
 ```
+
+## Profile Cleanup & Idempotent Shutdown
+
+### ProfileCleaner
+
+Chrome automation creates temporary user profile directories (`chromedp-runner*`) on each browser instance launch. If a process exits abruptly without closing the browser, these temporary directories can accumulate over time.
+
+`ProfileCleaner` inspects the temporary profile directory and removes stale profile directories left behind by processes that are no longer running:
+
+```go
+cleaner := devbrowser.NewProfileCleaner()
+removed, freedBytes, err := cleaner.CleanStale()
+if err == nil && removed > 0 {
+    fmt.Printf("Cleaned %d stale browser profile(s), freed %d bytes\n", removed, freedBytes)
+}
+```
+
+Consumers are encouraged to call `CleanStale()` at application startup. `CleanStale()` checks for active process locks (`SingletonLock`) to avoid disturbing live browser instances and respects a configurable grace period for newly initializing profiles.
+
+### Idempotent `CloseBrowser`
+
+`(*DevBrowser) CloseBrowser()` is idempotent and safe to call unconditionally (e.g. in `defer` statements or defensive shutdown paths). If the browser is already closed, it returns `nil` without error.
 
 ## Browser engine support
 

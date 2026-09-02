@@ -1,15 +1,11 @@
 package devbrowser
 
-import (
-	"errors"
-)
-
 func (h *DevBrowser) CloseBrowser() error {
 	h.Mu.Lock()
 	defer h.Mu.Unlock()
 
 	if !h.IsOpenFlag {
-		return errors.New("DevBrowser is already closed")
+		return nil
 	}
 
 	h.IsOpenFlag = false
