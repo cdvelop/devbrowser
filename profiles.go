@@ -84,6 +84,14 @@ func (c *ProfileCleaner) CleanStale() (removed int, freed int64, err error) {
 		isAlive = processAlive
 	}
 
+	// Grace is defended like every other field: a zero value here would make
+	// each lock-less directory instantly stale and sweep a browser that is
+	// still starting up, which is the one thing the grace window exists for.
+	grace := c.Grace
+	if grace <= 0 {
+		grace = DefaultStaleGrace
+	}
+
 	for _, entry := range entries {
 		if !entry.IsDir() || !strings.HasPrefix(entry.Name(), ProfilePrefix) {
 			continue
@@ -117,7 +125,7 @@ func (c *ProfileCleaner) CleanStale() (removed int, freed int64, err error) {
 			if statErr != nil {
 				continue
 			}
-			if now().Sub(info.ModTime()) > c.Grace {
+			if now().Sub(info.ModTime()) > grace {
 				stale = true
 			}
 		}

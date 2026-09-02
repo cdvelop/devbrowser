@@ -198,3 +198,27 @@ func TestCleanStale_MissingRootIsNotAnError(t *testing.T) {
 		t.Fatalf("expected 0 removed and 0 freed, got removed=%d, freed=%d", removed, freed)
 	}
 }
+
+func TestCleanStale_ZeroGraceFallsBackToDefault(t *testing.T) {
+	tempDir := t.TempDir()
+	runnerDir := filepath.Join(tempDir, "chromedp-runner7")
+	if err := os.Mkdir(runnerDir, 0755); err != nil {
+		t.Fatal(err)
+	}
+
+	// A cleaner built as a struct literal leaves Grace at zero. A brand-new
+	// directory with no lock yet is a browser that is still starting: it must
+	// survive the sweep.
+	cleaner := &devbrowser.ProfileCleaner{Root: tempDir}
+
+	removed, _, err := cleaner.CleanStale()
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if removed != 0 {
+		t.Fatalf("expected 0 removed dirs with a zero Grace, got %d", removed)
+	}
+	if _, err := os.Stat(runnerDir); err != nil {
+		t.Fatalf("expected %s to exist, got err %v", runnerDir, err)
+	}
+}
