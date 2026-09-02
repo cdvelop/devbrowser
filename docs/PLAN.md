@@ -2,8 +2,9 @@
 PLAN: "fix: idempotent CloseBrowser and stale Chrome profile cleanup"
 EXECUTOR: jules
 REVIEWER: none
-STATUS: running
+STATUS: review
 SESSION: 13852590319459618857
+PR: https://github.com/tinywasm/devbrowser/pull/13
 ---
 
 > This plan is dispatched via the CodeJob workflow. See skill: agents-workflow.
