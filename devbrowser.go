@@ -202,12 +202,28 @@ func (h *DevBrowser) RestartBrowser() error {
 
 	this := errors.New("RestartBrowser")
 
-	err := h.CloseBrowser()
-	if err != nil {
+	h.Mu.Lock()
+	port, https := h.LastPort, h.LastHttps
+	h.Mu.Unlock()
+
+	// Nothing has ever been opened, so there is no window to restart and no
+	// URL to go back to: opening on an empty port navigates to
+	// "http://localhost:/" and fails. Whoever knows the port — the dev server,
+	// through its OpenBrowser callback — opens the first window.
+	//
+	// Until v0.5.9 this was masked by CloseBrowser returning an error on an
+	// already-closed browser, which made this function bail out one line down.
+	// Making that call idempotent removed the accidental guard, so it is
+	// stated here on purpose.
+	if port == "" {
+		return nil
+	}
+
+	if err := h.CloseBrowser(); err != nil {
 		return errors.Join(this, err)
 	}
 
-	h.OpenBrowser(h.LastPort, h.LastHttps)
+	h.OpenBrowser(port, https)
 
 	return nil
 }
