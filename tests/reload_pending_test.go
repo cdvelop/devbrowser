@@ -41,7 +41,7 @@ func TestRecargaPedidaMientrasAbreSeAplicaAlQuedarListo(t *testing.T) {
 	mu.Lock()
 	foundPendingLog := false
 	for _, l := range logs {
-		if strings.Contains(l, "Reload pendiente: el navegador aún se está abriendo") {
+		if strings.Contains(l, "Reload pending: the browser is still opening") {
 			foundPendingLog = true
 			break
 		}
@@ -49,7 +49,7 @@ func TestRecargaPedidaMientrasAbreSeAplicaAlQuedarListo(t *testing.T) {
 	mu.Unlock()
 
 	if !foundPendingLog {
-		t.Errorf("Expected 'Reload pendiente' log message, got logs: %v", logs)
+		t.Errorf("Expected 'Reload pending' log message, got logs: %v", logs)
 	}
 
 	// 2. Transition to ready and process pending reload
@@ -63,7 +63,7 @@ func TestRecargaPedidaMientrasAbreSeAplicaAlQuedarListo(t *testing.T) {
 	mu.Lock()
 	foundApplyingLog := false
 	for _, l := range logs {
-		if strings.Contains(l, "Aplicando la recarga pendiente") {
+		if strings.Contains(l, "Applying the pending reload") {
 			foundApplyingLog = true
 			break
 		}
@@ -71,7 +71,7 @@ func TestRecargaPedidaMientrasAbreSeAplicaAlQuedarListo(t *testing.T) {
 	mu.Unlock()
 
 	if !foundApplyingLog {
-		t.Errorf("Expected 'Aplicando la recarga pendiente' log message, got logs: %v", logs)
+		t.Errorf("Expected 'Applying the pending reload' log message, got logs: %v", logs)
 	}
 }
 
@@ -118,14 +118,14 @@ func TestVariasRecargasPendientesSonUnaSola(t *testing.T) {
 	mu.Lock()
 	applyingCount := 0
 	for _, l := range logs {
-		if strings.Contains(l, "Aplicando la recarga pendiente") {
+		if strings.Contains(l, "Applying the pending reload") {
 			applyingCount++
 		}
 	}
 	mu.Unlock()
 
 	if applyingCount != 1 {
-		t.Errorf("Expected exactly 1 'Aplicando la recarga pendiente' log, got %d", applyingCount)
+		t.Errorf("Expected exactly 1 'Applying the pending reload' log, got %d", applyingCount)
 	}
 }
 

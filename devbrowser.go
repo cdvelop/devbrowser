@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/tinywasm/devbrowser/chromedp"
+	"github.com/tinywasm/fmt/lang"
 )
 
 type Store interface {
@@ -263,7 +264,7 @@ func (b *DevBrowser) Reload() error {
 			b.pendingReload = true
 		}
 		b.Mu.Unlock()
-		b.Logger("Reload pendiente: el navegador aún se está abriendo")
+		b.Logger(lang.Translate("Reload", "pending:", "the", "browser", "is", "still", "opening").String())
 		return nil
 	}
 	b.Mu.Unlock()
@@ -357,9 +358,9 @@ func (b *DevBrowser) ProcessPendingReload() {
 	b.Mu.Unlock()
 
 	if pending {
-		b.Logger("Aplicando la recarga pendiente")
+		b.Logger(lang.Translate("Applying", "the", "pending", "reload").String())
 		if err := b.Reload(); err != nil {
-			b.Logger("Recarga pendiente fallida:", err)
+			b.Logger(lang.Translate("Pending", "reload", "failed:", err).String())
 		}
 	}
 }
