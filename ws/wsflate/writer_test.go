@@ -10,8 +10,8 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/tinywasm/devbrowser/httphead"
-	"github.com/tinywasm/devbrowser/ws"
+	"webtyp.com/devbrowser/httphead"
+	"webtyp.com/devbrowser/ws"
 )
 
 func TestWriter(t *testing.T) {

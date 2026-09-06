@@ -106,10 +106,10 @@ Este es el resultado más reutilizable del análisis. Cada arreglo tiene un due�
 
 | Arreglo | Dueño | Razón |
 |---|---|---|
-| Métricas de emulación fieles (viewport, **DPR 3**, UA, touch, orientación) | **`tinywasm/devbrowser`** | Es quien controla el navegador. El catálogo `chromedp/device` ya está vendorizado aquí con 131 dispositivos y sus cuatro métricas correctas (`chromedp/device/device.go`); `chromedp.Emulate` (`chromedp/emulate.go:88`) los aplica de una vez |
-| **Detectar y reportar** los problemas que la emulación no puede reproducir | **`tinywasm/devbrowser`** | Es la pieza que puede *medir* la página cargada. Detecta; no arregla |
-| `<meta name="viewport" content="…, viewport-fit=cover">` | quien **emite el documento HTML** (`tinywasm/html` para el shell de `Document()`; `tinywasm/sitec` para el `index.html` del bundle) | `devbrowser` no inyecta etiquetas en la app del usuario: si lo hiciera, el emulador mostraría un HTML que el servidor real no sirve. Y sin `viewport-fit=cover` los `env(safe-area-inset-*)` valen **0**, con lo cual cualquier CSS de safe areas es código muerto |
-| Tokens de safe area, unidades de viewport dinámico, guarda anti-zoom de iOS, reset de controles nativos | **`tinywasm/css`** | Son decisiones del sistema de diseño, aplicables a toda app del ecosistema. El reset de `css.reset.go` ya cubre `-webkit-text-size-adjust`, `-webkit-tap-highlight-color` y el `appearance` de botones e inputs: la familia del arreglo ya vive ahí |
+| Métricas de emulación fieles (viewport, **DPR 3**, UA, touch, orientación) | **`webtyp/devbrowser`** | Es quien controla el navegador. El catálogo `chromedp/device` ya está vendorizado aquí con 131 dispositivos y sus cuatro métricas correctas (`chromedp/device/device.go`); `chromedp.Emulate` (`chromedp/emulate.go:88`) los aplica de una vez |
+| **Detectar y reportar** los problemas que la emulación no puede reproducir | **`webtyp/devbrowser`** | Es la pieza que puede *medir* la página cargada. Detecta; no arregla |
+| `<meta name="viewport" content="…, viewport-fit=cover">` | quien **emite el documento HTML** (`webtyp/html` para el shell de `Document()`; `webtyp/sitec` para el `index.html` del bundle) | `devbrowser` no inyecta etiquetas en la app del usuario: si lo hiciera, el emulador mostraría un HTML que el servidor real no sirve. Y sin `viewport-fit=cover` los `env(safe-area-inset-*)` valen **0**, con lo cual cualquier CSS de safe areas es código muerto |
+| Tokens de safe area, unidades de viewport dinámico, guarda anti-zoom de iOS, reset de controles nativos | **`webtyp/css`** | Son decisiones del sistema de diseño, aplicables a toda app del ecosistema. El reset de `css.reset.go` ya cubre `-webkit-text-size-adjust`, `-webkit-tap-highlight-color` y el `appearance` de botones e inputs: la familia del arreglo ya vive ahí |
 
 Regla general derivada: **`devbrowser` mide, no corrige.** Cuando una diferencia
 de render se pueda arreglar en el HTML o en el CSS por defecto, la herramienta
@@ -156,7 +156,7 @@ de dispositivo sobre motor WebKit real. Técnicamente es la opción más complet
 Se descarta porque:
 
 - Rompe el principio del repo: `go.mod` no tiene una sola dependencia fuera de
-  `tinywasm/*`, y todo CDP está vendorizado precisamente para no depender de terceros.
+  `webtyp/*`, y todo CDP está vendorizado precisamente para no depender de terceros.
 - `playwright-go` no es una implementación en Go: es un cliente que lanza el
   driver de **Node.js**. Pasarías de "un binario de Chrome" a "Node + driver +
   navegadores", con `playwright install` obligatorio en cada máquina y cada CI.
@@ -182,7 +182,7 @@ una verificación puntual antes de un release.
 ### 5.1 La decisión clave: W3C WebDriver, no un protocolo propietario
 
 **WebDriver es HTTP + JSON.** Un cliente mínimo se escribe con `net/http` y el
-`tinywasm/json` que el repo ya usa: **cero dependencias nuevas**, coherente con la
+`webtyp/json` que el repo ya usa: **cero dependencias nuevas**, coherente con la
 filosofía de vendorizar.
 
 Y el mismo cliente sirve para dos motores:

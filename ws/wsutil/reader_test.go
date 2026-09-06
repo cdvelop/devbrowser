@@ -7,7 +7,7 @@ import (
 	"testing"
 	"unicode/utf8"
 
-	"github.com/tinywasm/devbrowser/ws"
+	"webtyp.com/devbrowser/ws"
 )
 
 // TODO(gobwas): test continuation discard.

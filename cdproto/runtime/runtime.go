@@ -16,7 +16,7 @@ package runtime
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // AwaitPromiseParams add handler to promise with given promise object id.

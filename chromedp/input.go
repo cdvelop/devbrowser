@@ -3,10 +3,10 @@ package chromedp
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/dom"
-	"github.com/tinywasm/devbrowser/cdproto/input"
-	"github.com/tinywasm/devbrowser/chromedp/kb"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/dom"
+	"webtyp.com/devbrowser/cdproto/input"
+	"webtyp.com/devbrowser/chromedp/kb"
 )
 
 // MouseAction are mouse input event actions

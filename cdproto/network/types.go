@@ -5,10 +5,10 @@ package network
 import (
 	"encoding/json"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/io"
-	"github.com/tinywasm/devbrowser/cdproto/runtime"
-	"github.com/tinywasm/devbrowser/cdproto/security"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/io"
+	"webtyp.com/devbrowser/cdproto/runtime"
+	"webtyp.com/devbrowser/cdproto/security"
 )
 
 // ResourceType resource type as it was perceived by the rendering engine.

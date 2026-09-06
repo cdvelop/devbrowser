@@ -3,8 +3,8 @@ package wsflate
 import (
 	"bytes"
 
-	"github.com/tinywasm/devbrowser/httphead"
-	"github.com/tinywasm/devbrowser/ws"
+	"webtyp.com/devbrowser/httphead"
+	"webtyp.com/devbrowser/ws"
 )
 
 // Extension contains logic of compression extension parameters negotiation

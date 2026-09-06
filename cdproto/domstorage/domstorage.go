@@ -11,7 +11,7 @@ package domstorage
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // ClearParams [no description].

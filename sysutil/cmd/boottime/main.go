@@ -4,7 +4,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/tinywasm/devbrowser/sysutil"
+	"webtyp.com/devbrowser/sysutil"
 )
 
 func main() {

@@ -7,12 +7,12 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/tinywasm/devbrowser/cdproto"
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/dom"
-	"github.com/tinywasm/devbrowser/cdproto/page"
-	"github.com/tinywasm/devbrowser/cdproto/runtime"
-	"github.com/tinywasm/devbrowser/cdproto/target"
+	"webtyp.com/devbrowser/cdproto"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/dom"
+	"webtyp.com/devbrowser/cdproto/page"
+	"webtyp.com/devbrowser/cdproto/runtime"
+	"webtyp.com/devbrowser/cdproto/target"
 )
 
 // Target manages a Chrome DevTools Protocol target.

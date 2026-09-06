@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/tinywasm/devbrowser/cdproto/browser"
-	"github.com/tinywasm/devbrowser/chromedp"
+	"webtyp.com/devbrowser/cdproto/browser"
+	"webtyp.com/devbrowser/chromedp"
 )
 
 // monitorBrowserGeometry monitors changes in browser window position and size

@@ -4,9 +4,9 @@ package audits
 
 import (
 	"encoding/json"
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/network"
-	"github.com/tinywasm/devbrowser/cdproto/runtime"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/network"
+	"webtyp.com/devbrowser/cdproto/runtime"
 )
 
 // AffectedCookie information about a cookie that is affected by an inspector

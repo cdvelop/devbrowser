@@ -14,8 +14,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/tinywasm/devbrowser/httphead"
-	"github.com/tinywasm/devbrowser/pool/pbufio"
+	"webtyp.com/devbrowser/httphead"
+	"webtyp.com/devbrowser/pool/pbufio"
 )
 
 // Constants used by Dialer.

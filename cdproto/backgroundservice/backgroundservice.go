@@ -11,7 +11,7 @@ package backgroundservice
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // StartObservingParams enables event updates for the service.

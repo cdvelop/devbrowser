@@ -9,7 +9,7 @@ package input
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // DispatchDragEventParams dispatches a drag event into the page.

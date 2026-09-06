@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/tinywasm/context"
-	"github.com/tinywasm/devbrowser/chromedp"
-	"github.com/tinywasm/mcp"
+	"webtyp.com/context"
+	"webtyp.com/devbrowser/chromedp"
+	"webtyp.com/mcp"
 )
 
 // GetPerformanceJS extracts page performance metrics optimized for LLM consumption.

@@ -12,7 +12,7 @@ package performancetimeline
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // EnableParams previously buffered events would be reported before method

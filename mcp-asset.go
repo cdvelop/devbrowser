@@ -3,10 +3,10 @@ package devbrowser
 import (
 	"fmt"
 
-	"github.com/tinywasm/context"
-	"github.com/tinywasm/devbrowser/cdproto/runtime"
-	"github.com/tinywasm/devbrowser/chromedp"
-	"github.com/tinywasm/mcp"
+	"webtyp.com/context"
+	"webtyp.com/devbrowser/cdproto/runtime"
+	"webtyp.com/devbrowser/chromedp"
+	"webtyp.com/mcp"
 )
 
 func (b *DevBrowser) GetAssetTools() []mcp.Tool {

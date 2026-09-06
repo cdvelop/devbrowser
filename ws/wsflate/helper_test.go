@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/tinywasm/devbrowser/ws"
+	"webtyp.com/devbrowser/ws"
 )
 
 func TestHelperWriteAndRead(t *testing.T) {

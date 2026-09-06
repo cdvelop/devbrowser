@@ -1,6 +1,6 @@
 package pool
 
-import "github.com/tinywasm/devbrowser/pool/internal/pmath"
+import "webtyp.com/devbrowser/pool/internal/pmath"
 
 // Option configures pool.
 type Option func(Config)

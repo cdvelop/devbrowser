@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/tinywasm/devbrowser/pool"
-	"github.com/tinywasm/devbrowser/pool/pbytes"
-	"github.com/tinywasm/devbrowser/ws"
+	"webtyp.com/devbrowser/pool"
+	"webtyp.com/devbrowser/pool/pbytes"
+	"webtyp.com/devbrowser/ws"
 )
 
 // DefaultWriteBuffer contains size of Writer's default buffer. It used by

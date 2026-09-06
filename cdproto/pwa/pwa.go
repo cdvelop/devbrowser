@@ -11,8 +11,8 @@ package pwa
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/target"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/target"
 )
 
 // GetOsAppStateParams returns the following OS state for the given manifest

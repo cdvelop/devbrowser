@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tinywasm/devbrowser/chromedp"
+	"webtyp.com/devbrowser/chromedp"
 )
 
 func TestGetConsoleLogs(t *testing.T) {

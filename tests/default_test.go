@@ -1,9 +1,9 @@
 package devbrowser_test
 
 import (
-	"github.com/tinywasm/devbrowser"
-	"github.com/tinywasm/json"
-	"github.com/tinywasm/model"
+	"webtyp.com/devbrowser"
+	"webtyp.com/json"
+	"webtyp.com/model"
 	"errors"
 	"sync"
 )

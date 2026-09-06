@@ -1,15 +1,15 @@
 package devbrowser_test
 
 import (
-	"github.com/tinywasm/devbrowser"
+	"webtyp.com/devbrowser"
 	"context"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/tinywasm/devbrowser/chromedp"
-	"github.com/tinywasm/mcp"
+	"webtyp.com/devbrowser/chromedp"
+	"webtyp.com/mcp"
 )
 
 // TestBrowserSwipe verifies that the browser_swipe_element tool performs drag actions.

@@ -7,7 +7,7 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/tinywasm/devbrowser/httphead"
+	"webtyp.com/devbrowser/httphead"
 )
 
 type httpVersionCase struct {

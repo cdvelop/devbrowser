@@ -7,10 +7,10 @@ import (
 	"io"
 	"net"
 
-	"github.com/tinywasm/devbrowser/ws"
-	"github.com/tinywasm/devbrowser/ws/wsutil"
+	"webtyp.com/devbrowser/ws"
+	"webtyp.com/devbrowser/ws/wsutil"
 
-	"github.com/tinywasm/devbrowser/cdproto"
+	"webtyp.com/devbrowser/cdproto"
 )
 
 // Transport is the common interface to send/receive messages to a target.

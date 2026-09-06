@@ -3,7 +3,7 @@ package devbrowser
 import (
 	"fmt"
 
-	"github.com/tinywasm/devbrowser/chromedp"
+	"webtyp.com/devbrowser/chromedp"
 )
 
 // ScreenshotResult contains the image data and metadata about the captured page.

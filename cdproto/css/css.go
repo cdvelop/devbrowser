@@ -18,7 +18,7 @@ package css
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // AddRuleParams inserts a new rule with the given ruleText in a stylesheet

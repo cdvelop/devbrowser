@@ -13,8 +13,8 @@ import (
 	"context"
 	"encoding/base64"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/network"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/network"
 )
 
 // GetEncodedResponseParams returns the response body and size if it were

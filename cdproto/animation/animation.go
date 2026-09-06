@@ -9,8 +9,8 @@ package animation
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/runtime"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/runtime"
 )
 
 // DisableParams disables animation domain notifications.

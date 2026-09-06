@@ -13,9 +13,9 @@ import (
 	"context"
 	"encoding/base64"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/io"
-	"github.com/tinywasm/devbrowser/cdproto/network"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/io"
+	"webtyp.com/devbrowser/cdproto/network"
 )
 
 // DisableParams disables the fetch domain.

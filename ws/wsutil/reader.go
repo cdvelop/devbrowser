@@ -6,7 +6,7 @@ import (
 	"io"
 	"io/ioutil"
 
-	"github.com/tinywasm/devbrowser/ws"
+	"webtyp.com/devbrowser/ws"
 )
 
 // ErrNoFrameAdvance means that Reader's Read() method was called without

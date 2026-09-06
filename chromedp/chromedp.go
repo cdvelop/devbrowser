@@ -18,16 +18,16 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tinywasm/devbrowser/cdproto/browser"
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/css"
-	"github.com/tinywasm/devbrowser/cdproto/dom"
-	"github.com/tinywasm/devbrowser/cdproto/inspector"
-	"github.com/tinywasm/devbrowser/cdproto/log"
-	"github.com/tinywasm/devbrowser/cdproto/network"
-	"github.com/tinywasm/devbrowser/cdproto/page"
-	"github.com/tinywasm/devbrowser/cdproto/runtime"
-	"github.com/tinywasm/devbrowser/cdproto/target"
+	"webtyp.com/devbrowser/cdproto/browser"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/css"
+	"webtyp.com/devbrowser/cdproto/dom"
+	"webtyp.com/devbrowser/cdproto/inspector"
+	"webtyp.com/devbrowser/cdproto/log"
+	"webtyp.com/devbrowser/cdproto/network"
+	"webtyp.com/devbrowser/cdproto/page"
+	"webtyp.com/devbrowser/cdproto/runtime"
+	"webtyp.com/devbrowser/cdproto/target"
 )
 
 // Context is attached to any context.Context which is valid for use with Run.

@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/page"
-	"github.com/tinywasm/devbrowser/cdproto/runtime"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/page"
+	"webtyp.com/devbrowser/cdproto/runtime"
 )
 
 // Screenshot is an element query action that takes a screenshot of the first element

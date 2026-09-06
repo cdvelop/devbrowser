@@ -3,7 +3,7 @@
 //
 // Quick example:
 //
-//	import "github.com/tinywasm/devbrowser/pool"
+//	import "webtyp.com/devbrowser/pool"
 //
 //	func main() {
 //	   // Reuse objects in logarithmic range from 0 to 64 (0,1,2,4,6,8,16,32,64).

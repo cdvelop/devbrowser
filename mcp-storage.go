@@ -2,9 +2,9 @@ package devbrowser
 
 import (
 
-	"github.com/tinywasm/context"
-	"github.com/tinywasm/devbrowser/chromedp"
-	"github.com/tinywasm/mcp"
+	"webtyp.com/context"
+	"webtyp.com/devbrowser/chromedp"
+	"webtyp.com/mcp"
 )
 
 func (b *DevBrowser) GetStorageTools() []mcp.Tool {

@@ -6,10 +6,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tinywasm/context"
-	"github.com/tinywasm/devbrowser/cdproto/network"
-	"github.com/tinywasm/devbrowser/chromedp"
-	"github.com/tinywasm/mcp"
+	"webtyp.com/context"
+	"webtyp.com/devbrowser/cdproto/network"
+	"webtyp.com/devbrowser/chromedp"
+	"webtyp.com/mcp"
 )
 
 func (b *DevBrowser) GetNetworkTools() []mcp.Tool {

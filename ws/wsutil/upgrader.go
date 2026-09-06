@@ -7,7 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/tinywasm/devbrowser/ws"
+	"webtyp.com/devbrowser/ws"
 )
 
 // DebugUpgrader is a wrapper around ws.Upgrader. It tracks I/O of a

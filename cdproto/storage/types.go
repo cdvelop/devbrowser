@@ -4,7 +4,7 @@ package storage
 
 import (
 	"encoding/json"
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // SerializedStorageKey [no description].

@@ -11,11 +11,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/tinywasm/devbrowser/cdproto"
-	"github.com/tinywasm/devbrowser/cdproto/browser"
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/runtime"
-	"github.com/tinywasm/devbrowser/cdproto/target"
+	"webtyp.com/devbrowser/cdproto"
+	"webtyp.com/devbrowser/cdproto/browser"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/runtime"
+	"webtyp.com/devbrowser/cdproto/target"
 )
 
 // Browser is the high-level Chrome DevTools Protocol browser manager, handling

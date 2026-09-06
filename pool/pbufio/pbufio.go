@@ -5,7 +5,7 @@ import (
 	"bufio"
 	"io"
 
-	"github.com/tinywasm/devbrowser/pool"
+	"webtyp.com/devbrowser/pool"
 )
 
 var (

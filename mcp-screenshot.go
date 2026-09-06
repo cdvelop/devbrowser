@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/tinywasm/context"
-	"github.com/tinywasm/mcp"
+	"webtyp.com/context"
+	"webtyp.com/mcp"
 )
 
 func (b *DevBrowser) GetScreenshotTools() []mcp.Tool {

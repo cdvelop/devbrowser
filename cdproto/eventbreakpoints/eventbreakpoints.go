@@ -14,7 +14,7 @@ package eventbreakpoints
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // SetInstrumentationBreakpointParams sets breakpoint on particular native

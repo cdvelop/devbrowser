@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tinywasm/devbrowser/chromedp"
-	"github.com/tinywasm/fmt/lang"
+	"webtyp.com/devbrowser/chromedp"
+	"webtyp.com/fmt/lang"
 )
 
 type Store interface {

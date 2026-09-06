@@ -1,6 +1,6 @@
 package wsutil
 
-import "github.com/tinywasm/devbrowser/ws"
+import "webtyp.com/devbrowser/ws"
 
 // RecvExtension is an interface for clearing fragment header RSV bits.
 type RecvExtension interface {

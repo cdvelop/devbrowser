@@ -9,8 +9,8 @@ package heapprofiler
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/runtime"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/runtime"
 )
 
 // AddInspectedHeapObjectParams enables console to refer to the node with

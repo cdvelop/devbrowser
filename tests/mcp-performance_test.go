@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/tinywasm/devbrowser"
+	"webtyp.com/devbrowser"
 )
 
 // optimizedSiteMetrics simulates a well-optimized TinyGo WASM site:

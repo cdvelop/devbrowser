@@ -4,7 +4,7 @@
 package screenresolution
 
 import (
-	"github.com/tinywasm/devbrowser/win"
+	"webtyp.com/devbrowser/win"
 )
 
 func getPrimary() *Resolution {

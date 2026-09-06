@@ -10,7 +10,7 @@ import "testing"
 // This used to be masked: CloseBrowser returned an "already closed" error on a
 // closed browser, so RestartBrowser bailed out before reaching OpenBrowser.
 // Making CloseBrowser idempotent (v0.5.9) removed that accidental guard, and
-// the empty-port open became reachable — every cold start of the tinywasm
+// the empty-port open became reachable — every cold start of the webtyp
 // daemon hit it, because the daemon asks for the browser before the dev server
 // has reported which port it listens on.
 func TestRestartBrowser_NeverOpened_DoesNotOpenOnAnEmptyPort(t *testing.T) {

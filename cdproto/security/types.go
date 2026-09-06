@@ -4,7 +4,7 @@ package security
 
 import (
 	"encoding/json"
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // CertificateID an internal certificate ID value.

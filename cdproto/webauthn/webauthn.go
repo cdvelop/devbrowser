@@ -12,7 +12,7 @@ package webauthn
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // EnableParams enable the WebAuthn domain and start intercepting credential

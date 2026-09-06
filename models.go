@@ -1,6 +1,6 @@
 package devbrowser
 
-import "github.com/tinywasm/model"
+import "webtyp.com/model"
 
 // Whitelists explícitas (model ≥ v0.0.8: reemplazan el piso default de
 // Text() — ver model/docs/ARCHITECTURE.md §8). El encoding de salida es

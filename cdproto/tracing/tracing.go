@@ -9,7 +9,7 @@ package tracing
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // EndParams stop trace events collection.

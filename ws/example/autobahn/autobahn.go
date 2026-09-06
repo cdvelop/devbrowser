@@ -15,10 +15,10 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/tinywasm/devbrowser/httphead"
-	"github.com/tinywasm/devbrowser/ws"
-	"github.com/tinywasm/devbrowser/ws/wsflate"
-	"github.com/tinywasm/devbrowser/ws/wsutil"
+	"webtyp.com/devbrowser/httphead"
+	"webtyp.com/devbrowser/ws"
+	"webtyp.com/devbrowser/ws/wsflate"
+	"webtyp.com/devbrowser/ws/wsutil"
 )
 
 var addr = flag.String("listen", ":9001", "addr to listen")

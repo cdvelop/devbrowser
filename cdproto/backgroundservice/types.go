@@ -4,8 +4,8 @@ package backgroundservice
 
 import (
 	"encoding/json"
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/serviceworker"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/serviceworker"
 )
 
 // ServiceName the Background Service that will be associated with the

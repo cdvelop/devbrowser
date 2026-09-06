@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/tinywasm/mcp"
+	"webtyp.com/mcp"
 )
 
 func TestRelativeNavigation(t *testing.T) {

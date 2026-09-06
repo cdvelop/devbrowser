@@ -5,7 +5,7 @@ package debugger
 import (
 
 	"encoding/json"
-	"github.com/tinywasm/devbrowser/cdproto/runtime"
+	"webtyp.com/devbrowser/cdproto/runtime"
 )
 
 // BreakpointID breakpoint identifier.

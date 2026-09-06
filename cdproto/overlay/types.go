@@ -4,8 +4,8 @@ package overlay
 
 import (
 	"encoding/json"
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/dom"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/dom"
 )
 
 // SourceOrderConfig configuration data for drawing the source order of an

@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"reflect"
 
-	"github.com/tinywasm/devbrowser/cdproto/runtime"
+	"webtyp.com/devbrowser/cdproto/runtime"
 )
 
 // EvaluateAction are actions that evaluate JavaScript expressions using

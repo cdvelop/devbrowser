@@ -4,14 +4,14 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/tinywasm/context"
-	"github.com/tinywasm/json"
-	"github.com/tinywasm/mcp"
-	"github.com/tinywasm/model"
+	"webtyp.com/context"
+	"webtyp.com/json"
+	"webtyp.com/mcp"
+	"webtyp.com/model"
 )
 
 // encodeMCPMessage serializes an mcp.JSONRPCMessage to its wire JSON using
-// tinywasm/json (never stdlib), exactly as the transport emits it.
+// webtyp/json (never stdlib), exactly as the transport emits it.
 func encodeMCPMessage(resp mcp.JSONRPCMessage) string {
 	var b []byte
 	if f, ok := resp.(model.Encodable); ok {
@@ -58,7 +58,7 @@ func toolsListBody(t *testing.T) (string, int) {
 //
 // Este test FALLA mientras el inputSchema se genere mal (p.ej. serializando el
 // struct: {"fullpage":false}, o `null`) y PASA cuando la responsabilidad de
-// generar el inputSchema desde Schema() []model.Field viva en tinywasm/mcp.
+// generar el inputSchema desde Schema() []model.Field viva en webtyp/mcp.
 // NO debe existir lógica de JSON Schema en devbrowser: models.go solo declara los
 // campos; ormc genera Schema(); mcp genera el inputSchema del protocolo.
 func TestMCP_ToolsList_InputSchemaIsValidJSONSchema(t *testing.T) {

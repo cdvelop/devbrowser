@@ -13,7 +13,7 @@ import (
 	"path/filepath"
 	"strconv"
 
-	"github.com/tinywasm/devbrowser/pixelmatch"
+	"webtyp.com/devbrowser/pixelmatch"
 )
 
 type colorValue color.RGBA

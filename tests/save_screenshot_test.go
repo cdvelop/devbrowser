@@ -9,9 +9,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/tinywasm/devbrowser"
-	"github.com/tinywasm/json"
-	"github.com/tinywasm/mcp"
+	"webtyp.com/devbrowser"
+	"webtyp.com/json"
+	"webtyp.com/mcp"
 )
 
 func TestSaveScreenshot_MetadataAndIsolation(t *testing.T) {

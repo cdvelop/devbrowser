@@ -4,7 +4,7 @@ package serviceworker
 
 import (
 	"encoding/json"
-	"github.com/tinywasm/devbrowser/cdproto/target"
+	"webtyp.com/devbrowser/cdproto/target"
 )
 
 // RegistrationID [no description].

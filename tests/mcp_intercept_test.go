@@ -8,10 +8,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tinywasm/devbrowser"
-	"github.com/tinywasm/devbrowser/chromedp"
-	"github.com/tinywasm/json"
-	"github.com/tinywasm/mcp"
+	"webtyp.com/devbrowser"
+	"webtyp.com/devbrowser/chromedp"
+	"webtyp.com/json"
+	"webtyp.com/mcp"
 )
 
 func TestInterceptRequest_CapturesBody(t *testing.T) {

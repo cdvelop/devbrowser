@@ -21,15 +21,15 @@ import (
 	"strings"
 	"time"
 
-	"github.com/tinywasm/devbrowser"
-	"github.com/tinywasm/devbrowser/chromedp"
-	"github.com/tinywasm/devbrowser/chromedp/device"
+	"webtyp.com/devbrowser"
+	"webtyp.com/devbrowser/chromedp"
+	"webtyp.com/devbrowser/chromedp/device"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/dom"
-	"github.com/tinywasm/devbrowser/cdproto/page"
-	"github.com/tinywasm/devbrowser/cdproto/runtime"
-	"github.com/tinywasm/devbrowser/cdproto/target"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/dom"
+	"webtyp.com/devbrowser/cdproto/page"
+	"webtyp.com/devbrowser/cdproto/runtime"
+	"webtyp.com/devbrowser/cdproto/target"
 )
 
 // newExampleContext sets up a chromedp context using an explicitly resolved

@@ -5,11 +5,11 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/tinywasm/context"
-	"github.com/tinywasm/devbrowser/cdproto/emulation"
-	"github.com/tinywasm/devbrowser/chromedp"
-	"github.com/tinywasm/devbrowser/chromedp/device"
-	"github.com/tinywasm/mcp"
+	"webtyp.com/context"
+	"webtyp.com/devbrowser/cdproto/emulation"
+	"webtyp.com/devbrowser/chromedp"
+	"webtyp.com/devbrowser/chromedp/device"
+	"webtyp.com/mcp"
 )
 
 const (

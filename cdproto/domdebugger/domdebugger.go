@@ -13,8 +13,8 @@ package domdebugger
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/runtime"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/runtime"
 )
 
 // GetEventListenersParams returns event listeners of the given object.

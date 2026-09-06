@@ -18,8 +18,8 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/tinywasm/devbrowser/httphead"
-	"github.com/tinywasm/devbrowser/pool/pbufio"
+	"webtyp.com/devbrowser/httphead"
+	"webtyp.com/devbrowser/pool/pbufio"
 )
 
 // TODO(gobwas): upgradeGenericCase with methods like configureUpgrader,

@@ -1,14 +1,14 @@
 package devbrowser_test
 
 import (
-	"github.com/tinywasm/devbrowser"
+	"webtyp.com/devbrowser"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/tinywasm/devbrowser/chromedp"
-	"github.com/tinywasm/mcp"
+	"webtyp.com/devbrowser/chromedp"
+	"webtyp.com/mcp"
 )
 
 func TestBrowserNavigation(t *testing.T) {

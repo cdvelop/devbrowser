@@ -6,10 +6,10 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/tinywasm/context"
-	"github.com/tinywasm/devbrowser/cdproto/input"
-	"github.com/tinywasm/devbrowser/chromedp"
-	"github.com/tinywasm/mcp"
+	"webtyp.com/context"
+	"webtyp.com/devbrowser/cdproto/input"
+	"webtyp.com/devbrowser/chromedp"
+	"webtyp.com/mcp"
 )
 
 func (b *DevBrowser) GetInteractionTools() []mcp.Tool {

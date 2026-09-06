@@ -10,7 +10,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/tinywasm/devbrowser/ws"
+	"webtyp.com/devbrowser/ws"
 )
 
 var bg = context.Background()

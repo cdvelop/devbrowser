@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/tinywasm/devbrowser/humanize"
+	"webtyp.com/devbrowser/humanize"
 )
 
 // These are included because they are common technical terms.

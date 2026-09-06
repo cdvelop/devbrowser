@@ -10,7 +10,7 @@ import (
 	"context"
 
 	"encoding/json"
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // DisableParams disables database tracking, prevents database events from

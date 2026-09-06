@@ -4,7 +4,7 @@ package debugger
 
 import (
 	"encoding/json"
-	"github.com/tinywasm/devbrowser/cdproto/runtime"
+	"webtyp.com/devbrowser/cdproto/runtime"
 )
 
 // EventBreakpointResolved fired when breakpoint is resolved to an actual

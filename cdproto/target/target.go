@@ -11,7 +11,7 @@ package target
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // ActivateTargetParams activates (focuses) the target.

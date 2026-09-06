@@ -11,8 +11,8 @@ package emulation
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/page"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/page"
 )
 
 // ClearDeviceMetricsOverrideParams clears the overridden device metrics.

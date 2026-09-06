@@ -1,8 +1,8 @@
 package chromedp
 
 import (
-	"github.com/tinywasm/devbrowser/cdproto/emulation"
-	"github.com/tinywasm/devbrowser/chromedp/device"
+	"webtyp.com/devbrowser/cdproto/emulation"
+	"webtyp.com/devbrowser/chromedp/device"
 )
 
 // EmulateAction are actions that change the emulation settings for the

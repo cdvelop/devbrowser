@@ -13,7 +13,7 @@ import (
 	"context"
 	"encoding/base64"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // BeginFrameParams sends a BeginFrame to the target and returns when the

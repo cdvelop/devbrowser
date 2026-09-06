@@ -3,7 +3,7 @@ package devbrowser
 import (
 	"fmt"
 
-	"github.com/tinywasm/screenshot"
+	"webtyp.com/screenshot"
 )
 
 // QueryMonitorSize is a function variable to allow mocking in tests.

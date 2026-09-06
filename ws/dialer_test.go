@@ -15,7 +15,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tinywasm/devbrowser/httphead"
+	"webtyp.com/devbrowser/httphead"
 )
 
 func TestDialerRequest(t *testing.T) {

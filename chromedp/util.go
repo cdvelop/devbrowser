@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/tinywasm/devbrowser/cdproto"
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // forceIP tries to force the host component in urlstr to be an IP address.

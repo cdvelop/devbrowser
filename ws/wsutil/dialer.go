@@ -9,7 +9,7 @@ import (
 	"net"
 	"net/http"
 
-	"github.com/tinywasm/devbrowser/ws"
+	"webtyp.com/devbrowser/ws"
 )
 
 // DebugDialer is a wrapper around ws.Dialer. It tracks i/o of WebSocket

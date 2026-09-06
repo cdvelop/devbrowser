@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/tinywasm/devbrowser/ws"
+	"webtyp.com/devbrowser/ws"
 )
 
 // DefaultHelper is a default helper instance holding standard library's

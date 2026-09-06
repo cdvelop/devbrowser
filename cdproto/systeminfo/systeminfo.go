@@ -12,7 +12,7 @@ package systeminfo
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // GetInfoParams returns information about the system.

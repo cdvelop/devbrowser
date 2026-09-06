@@ -1,7 +1,7 @@
 package devbrowser_test
 
 import (
-	"github.com/tinywasm/devbrowser"
+	"webtyp.com/devbrowser"
 	"testing"
 )
 

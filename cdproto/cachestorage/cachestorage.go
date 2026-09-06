@@ -9,8 +9,8 @@ package cachestorage
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/storage"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/storage"
 )
 
 // DeleteCacheParams deletes a cache.

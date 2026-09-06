@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tinywasm/devbrowser/chromedp"
+	"webtyp.com/devbrowser/chromedp"
 )
 
 func TestConsoleCapture(t *testing.T) {

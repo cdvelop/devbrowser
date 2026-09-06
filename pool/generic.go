@@ -3,7 +3,7 @@ package pool
 import (
 	"sync"
 
-	"github.com/tinywasm/devbrowser/pool/internal/pmath"
+	"webtyp.com/devbrowser/pool/internal/pmath"
 )
 
 var DefaultPool = New(128, 65536)

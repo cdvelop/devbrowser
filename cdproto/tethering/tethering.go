@@ -11,7 +11,7 @@ package tethering
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // BindParams request browser port binding.

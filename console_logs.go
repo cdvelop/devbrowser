@@ -4,10 +4,10 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/tinywasm/devbrowser/cdproto/audits"
-	"github.com/tinywasm/devbrowser/cdproto/log"
-	"github.com/tinywasm/devbrowser/cdproto/runtime"
-	"github.com/tinywasm/devbrowser/chromedp"
+	"webtyp.com/devbrowser/cdproto/audits"
+	"webtyp.com/devbrowser/cdproto/log"
+	"webtyp.com/devbrowser/cdproto/runtime"
+	"webtyp.com/devbrowser/chromedp"
 )
 
 // initializeConsoleCapture sets up the console log capturing system using Chrome DevTools Protocol.

@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/tinywasm/devbrowser/cdproto/browser"
-	"github.com/tinywasm/devbrowser/chromedp"
+	"webtyp.com/devbrowser/cdproto/browser"
+	"webtyp.com/devbrowser/chromedp"
 )
 
 // GrowWindowToFit resizes the live physical browser window, in place, so it

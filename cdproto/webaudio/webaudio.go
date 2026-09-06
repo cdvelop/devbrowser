@@ -12,7 +12,7 @@ package webaudio
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // EnableParams enables the WebAudio domain and starts sending context

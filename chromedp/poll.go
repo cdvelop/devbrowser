@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/runtime"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/runtime"
 )
 
 // PollAction are actions that will wait for a general JavaScript predicate.

@@ -5,7 +5,7 @@ package indexeddb
 import (
 
 	"encoding/json"
-	"github.com/tinywasm/devbrowser/cdproto/runtime"
+	"webtyp.com/devbrowser/cdproto/runtime"
 )
 
 // DatabaseWithObjectStores database with an array of object stores.

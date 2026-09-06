@@ -1,8 +1,8 @@
 package devbrowser
 
 import (
-	"github.com/tinywasm/fmt"
-	"github.com/tinywasm/mcp"
+	"webtyp.com/fmt"
+	"webtyp.com/mcp"
 )
 
 // ErrBrowserNotOpen es el error de precondición de todos los tools browser_*.

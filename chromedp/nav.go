@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/tinywasm/devbrowser/cdproto/page"
+	"webtyp.com/devbrowser/cdproto/page"
 )
 
 // NavigateAction are actions which always trigger a page navigation, waiting

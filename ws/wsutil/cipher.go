@@ -3,8 +3,8 @@ package wsutil
 import (
 	"io"
 
-	"github.com/tinywasm/devbrowser/pool/pbytes"
-	"github.com/tinywasm/devbrowser/ws"
+	"webtyp.com/devbrowser/pool/pbytes"
+	"webtyp.com/devbrowser/ws"
 )
 
 // CipherReader implements io.Reader that applies xor-cipher to the bytes read

@@ -3,8 +3,8 @@ package devbrowser
 import (
 	"fmt"
 
-	"github.com/tinywasm/context"
-	"github.com/tinywasm/mcp"
+	"webtyp.com/context"
+	"webtyp.com/mcp"
 )
 
 func (b *DevBrowser) GetConsoleTools() []mcp.Tool {

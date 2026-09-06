@@ -10,11 +10,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tinywasm/devbrowser/cdproto"
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/css"
-	"github.com/tinywasm/devbrowser/cdproto/dom"
-	"github.com/tinywasm/devbrowser/cdproto/runtime"
+	"webtyp.com/devbrowser/cdproto"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/css"
+	"webtyp.com/devbrowser/cdproto/dom"
+	"webtyp.com/devbrowser/cdproto/runtime"
 )
 
 // QueryAction are element query actions that select node elements from the

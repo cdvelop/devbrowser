@@ -6,8 +6,8 @@ import (
 	"io/ioutil"
 	"strconv"
 
-	"github.com/tinywasm/devbrowser/pool/pbytes"
-	"github.com/tinywasm/devbrowser/ws"
+	"webtyp.com/devbrowser/pool/pbytes"
+	"webtyp.com/devbrowser/ws"
 )
 
 // ClosedError returned when peer has closed the connection with appropriate

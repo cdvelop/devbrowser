@@ -5,7 +5,7 @@ import (
 	"io"
 	"io/ioutil"
 
-	"github.com/tinywasm/devbrowser/ws"
+	"webtyp.com/devbrowser/ws"
 )
 
 // Message represents a message from peer, that could be presented in one or

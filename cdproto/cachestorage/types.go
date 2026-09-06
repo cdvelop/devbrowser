@@ -4,7 +4,7 @@ package cachestorage
 
 import (
 	"encoding/json"
-	"github.com/tinywasm/devbrowser/cdproto/storage"
+	"webtyp.com/devbrowser/cdproto/storage"
 )
 
 // CacheID unique identifier of the Cache object.

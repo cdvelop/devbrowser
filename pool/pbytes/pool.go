@@ -3,7 +3,7 @@
 
 package pbytes
 
-import "github.com/tinywasm/devbrowser/pool"
+import "webtyp.com/devbrowser/pool"
 
 // Pool contains logic of reusing byte slices of various size.
 type Pool struct {

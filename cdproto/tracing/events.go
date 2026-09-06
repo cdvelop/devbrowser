@@ -4,7 +4,7 @@ package tracing
 
 import (
 	"encoding/json"
-	"github.com/tinywasm/devbrowser/cdproto/io"
+	"webtyp.com/devbrowser/cdproto/io"
 )
 
 // EventBufferUsage [no description].

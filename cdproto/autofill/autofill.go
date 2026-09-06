@@ -11,7 +11,7 @@ package autofill
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // TriggerParams trigger autofill on a form identified by the fieldId. If the

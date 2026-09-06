@@ -14,8 +14,8 @@ import (
 	"context"
 	"encoding/base64"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/runtime"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/runtime"
 )
 
 // ContinueToLocationParams continues execution until specific location is

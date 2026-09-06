@@ -8,7 +8,7 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/tinywasm/devbrowser/httphead"
+	"webtyp.com/devbrowser/httphead"
 )
 
 const (

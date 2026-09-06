@@ -12,7 +12,7 @@ package cast
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // EnableParams starts observing for sinks that can be used for tab

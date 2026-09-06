@@ -5,7 +5,7 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/tinywasm/devbrowser/ws"
+	"webtyp.com/devbrowser/ws"
 )
 
 func TestControlHandler(t *testing.T) {

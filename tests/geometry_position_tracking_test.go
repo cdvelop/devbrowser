@@ -3,7 +3,7 @@ package devbrowser_test
 import (
 	"testing"
 
-	"github.com/tinywasm/devbrowser"
+	"webtyp.com/devbrowser"
 )
 
 // TestPositionSavedOnUserMovement verifies the normal case proven by the headful

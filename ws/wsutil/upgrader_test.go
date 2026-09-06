@@ -7,7 +7,7 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/tinywasm/devbrowser/ws"
+	"webtyp.com/devbrowser/ws"
 )
 
 func TestDebugUpgrader(t *testing.T) {

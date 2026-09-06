@@ -13,7 +13,7 @@ package extensions
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // LoadUnpackedParams installs an unpacked extension from the filesystem

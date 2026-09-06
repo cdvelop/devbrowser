@@ -13,7 +13,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tinywasm/devbrowser/sysutil"
+	"webtyp.com/devbrowser/sysutil"
 )
 
 // Executor is the common interface for executing a command.

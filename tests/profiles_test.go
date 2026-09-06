@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tinywasm/devbrowser"
+	"webtyp.com/devbrowser"
 )
 
 func TestCleanStale_RemovesDirWithoutLock(t *testing.T) {

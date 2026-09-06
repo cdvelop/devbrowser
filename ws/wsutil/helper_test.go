@@ -5,7 +5,7 @@ import (
 	"io"
 	"testing"
 
-	"github.com/tinywasm/devbrowser/ws"
+	"webtyp.com/devbrowser/ws"
 )
 
 func TestReadMessageEOF(t *testing.T) {

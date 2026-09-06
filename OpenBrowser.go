@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/tinywasm/devbrowser/chromedp"
+	"webtyp.com/devbrowser/chromedp"
 )
 
 func (h *DevBrowser) OpenBrowser(port string, https bool) {

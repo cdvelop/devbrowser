@@ -4,9 +4,9 @@ package page
 
 import (
 	"encoding/json"
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/network"
-	"github.com/tinywasm/devbrowser/cdproto/runtime"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/network"
+	"webtyp.com/devbrowser/cdproto/runtime"
 )
 
 // AdScriptID identifies the bottom-most script which caused the frame to be

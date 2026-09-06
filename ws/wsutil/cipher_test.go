@@ -7,7 +7,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/tinywasm/devbrowser/ws"
+	"webtyp.com/devbrowser/ws"
 )
 
 func TestCipherReader(t *testing.T) {

@@ -9,7 +9,7 @@ A lightweight Go library for launching and controlling web browsers programmatic
 The main entry point is the `New` function, which creates a new browser controller:
 
 ```go
-import "github.com/tinywasm/devbrowser"
+import "webtyp.com/devbrowser"
 
 type myServerConfig struct{}
 func (myServerConfig) GetServerPort() string { return "8080" }

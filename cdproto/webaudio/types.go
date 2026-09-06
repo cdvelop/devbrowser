@@ -4,7 +4,7 @@ package webaudio
 
 import (
 	"encoding/json"
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // GraphObjectID an unique ID for a graph object (AudioContext, AudioNode,

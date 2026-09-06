@@ -10,8 +10,8 @@ import (
 	"context"
 
 	"encoding/json"
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/dom"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/dom"
 )
 
 // CompositingReasonsParams provides the reasons why the given layer was

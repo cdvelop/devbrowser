@@ -520,7 +520,7 @@ import (
 	"runtime"
 	"unicode"
 
-	"github.com/tinywasm/devbrowser/cdproto/input"
+	"webtyp.com/devbrowser/cdproto/input"
 )
 
 // Key contains information for generating a key press based off the unicode

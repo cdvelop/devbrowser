@@ -5,7 +5,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/tinywasm/devbrowser/httphead"
+	"webtyp.com/devbrowser/httphead"
 )
 
 // SelectFromSlice creates accept function that could be used as Protocol/Extension

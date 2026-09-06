@@ -10,7 +10,7 @@ import (
 	"testing"
 	"unsafe"
 
-	"github.com/tinywasm/devbrowser/ws"
+	"webtyp.com/devbrowser/ws"
 )
 
 // TODO(gobwas): test NewWriterSize on edge cases for offset.

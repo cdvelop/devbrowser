@@ -5,7 +5,7 @@ package fetch
 import (
 
 	"encoding/json"
-	"github.com/tinywasm/devbrowser/cdproto/network"
+	"webtyp.com/devbrowser/cdproto/network"
 )
 
 // RequestID unique request identifier.

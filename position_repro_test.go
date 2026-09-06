@@ -14,8 +14,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tinywasm/devbrowser/cdproto/browser"
-	"github.com/tinywasm/devbrowser/chromedp"
+	"webtyp.com/devbrowser/cdproto/browser"
+	"webtyp.com/devbrowser/chromedp"
 )
 
 // reproStore is a minimal in-memory Store for the reproduction test.

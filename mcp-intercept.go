@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"strings"
 
-	twcontext "github.com/tinywasm/context"
-	"github.com/tinywasm/devbrowser/cdproto/fetch"
-	"github.com/tinywasm/devbrowser/chromedp"
-	"github.com/tinywasm/mcp"
+	twcontext "webtyp.com/context"
+	"webtyp.com/devbrowser/cdproto/fetch"
+	"webtyp.com/devbrowser/chromedp"
+	"webtyp.com/mcp"
 )
 
 func (b *DevBrowser) GetInterceptTools() []mcp.Tool {

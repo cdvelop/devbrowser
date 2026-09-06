@@ -4,7 +4,7 @@ package accessibility
 
 import (
 	"encoding/json"
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // NodeID unique accessibility node identifier.

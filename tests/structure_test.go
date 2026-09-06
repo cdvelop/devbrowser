@@ -1,7 +1,7 @@
 package devbrowser_test
 
 import (
-	"github.com/tinywasm/devbrowser"
+	"webtyp.com/devbrowser"
 	"context"
 	"fmt"
 	"net/http"
@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tinywasm/devbrowser/chromedp"
+	"webtyp.com/devbrowser/chromedp"
 )
 
 // TestPageStructureExtraction verifies that the JavaScript logic

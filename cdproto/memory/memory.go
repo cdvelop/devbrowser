@@ -9,7 +9,7 @@ package memory
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // GetDOMCountersParams [no description].

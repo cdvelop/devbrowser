@@ -4,8 +4,8 @@ package storage
 
 import (
 	"encoding/json"
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
-	"github.com/tinywasm/devbrowser/cdproto/network"
+	"webtyp.com/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/network"
 )
 
 // EventCacheStorageContentUpdated a cache's contents have been modified.

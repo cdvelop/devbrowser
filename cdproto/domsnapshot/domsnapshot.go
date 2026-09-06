@@ -12,7 +12,7 @@ package domsnapshot
 import (
 	"context"
 
-	"github.com/tinywasm/devbrowser/cdproto/cdp"
+	"webtyp.com/devbrowser/cdproto/cdp"
 )
 
 // DisableParams disables DOM snapshot agent for the given page.
